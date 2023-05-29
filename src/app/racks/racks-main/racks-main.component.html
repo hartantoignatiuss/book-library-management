@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header>
+    <h3>Racks</h3>
+  </mat-card-header>
+
+  <mat-card-content>
+    <button
+    class="btn btn-primary"
+    (click)="onClickCreateButton()">
+    Create
+  </button>
+  <table class="table">
+    <thead>
+      <tr>
+      <th>No</th>
+      <th>Racks Name</th>
+      <th>Racks Location</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="racks.length===0">
+      <th
+      colspan="4"
+      style="text-align:center"
+      >No Data</th>
+    </tr>
+
+    <tr *ngFor="let rack of racks; let i = index">
+      <th>{{i+1}}</th>
+      <th>{{rack.name}}</th>
+      <th>{{rack.location}}</th>
+      <th>
+        <button class="btn btn-primary"
+        (click)="onClickEdit(rack)">
+        Edit
+        </button>
+        <button class="btn btn-danger"
+        (click)="onClickDelete(rack)">Delete</button>
+
+      </th>
+    </tr>
+  </tbody>
+  </table>
+</mat-card-content>
+
+</mat-card>
+
+<app-loader *ngIf="isLoading"></app-loader>
+
+
+

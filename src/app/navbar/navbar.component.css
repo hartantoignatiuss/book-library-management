@@ -1,0 +1,14 @@
+.example-container {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color:white
+}
+.nav-link{
+  color: white
+}
+/* .mat-drawer-inner-container{
+  width:200px
+} */
