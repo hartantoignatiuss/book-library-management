@@ -33,6 +33,14 @@
             *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched"
             class="danger">Category is required</span>
           </div>
+          <mat-form-field>
+            <mat-label>Category-option</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let cats of categories" [value]="category.name">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <div class="form-group">
             <label for="rack">Rack*</label>
@@ -43,6 +51,14 @@
             *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched"
             class="danger">Rack is required</span>
           </div>
+          <mat-form-field>
+            <mat-label>Rack-option</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let racs of racks" [value]="rack.name">
+                {{rack.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <div class="form-group">
             <label for="stock">Stock*</label>
