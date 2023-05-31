@@ -3,6 +3,8 @@ import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Book } from './books.model';
+import { Category } from './../categories/category.model';
+import { Rack } from './../racks/rack.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -12,10 +14,20 @@ export class BooksService {
   endPointURL: string =
     'https://book-library-management-b46f2-default-rtdb.asia-southeast1.firebasedatabase.app/';
   URL: string = this.endPointURL + 'books.json';
+  
+  isCreate: boolean = true;
   errorHandling = new Subject<any>();
+
+  //book
   books: Book[] = [];
   book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 };
-  isCreate: boolean = true;
+  //category
+  category: Category = { id: '', name: '', isDelete: 0 };
+  categories: Category[] = [];
+  //rack
+  racks: Rack[] = [];
+  rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
+
 
   constructor(private http: HttpClient, private AuthService: AuthService) {}
   
@@ -82,8 +94,8 @@ export class BooksService {
   getBookById(id: string) {
     // let category:Category = this.categories.find(i => i.id === id) || ;
     // return category;
+    // console.log(this, this.books);
 
-    console.log(this, this.books);
     return this.http
       .get(this.URL, {
         params: new HttpParams().set('auth', this.AuthService.getAuthToken()),
@@ -106,5 +118,48 @@ export class BooksService {
           return this.book;
         })
       );
+  }
+
+  getCategories() {
+    return this.http
+      .get(this.endPointURL + 'category.json', {
+        params: new HttpParams().set('auth', this.AuthService.getAuthToken()),
+      })
+      .pipe(
+        map((responseData: any) => {
+          const categories: Category[] = [];
+          for (const key in responseData) {
+            if (
+              responseData.hasOwnProperty(key) &&
+              responseData[key].isDelete !== 1
+            ) {
+              categories.push({ ...responseData[key], id: key });
+            }
+          }
+          this.categories = categories;
+          return categories;
+        })
+      );
+  }
+
+  getRacks() {
+    return this.http
+    .get(this.endPointURL + 'rack.json',{
+      params: new HttpParams().set('auth', this.AuthService.getAuthToken()),
+    }).pipe(
+      map((responseData: any) => {
+        const racks: Rack[] = [];
+        for (const key in responseData) {
+          if (
+            responseData.hasOwnProperty(key) &&
+            responseData[key].isDelete !== 1
+          ) {
+            racks.push({ ...responseData[key], id: key });
+          }
+        }
+        this.racks = racks;
+        return racks;
+      })
+    );
   }
 }
