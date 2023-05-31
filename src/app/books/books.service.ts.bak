@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+
+
+
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Category } from './category.model';
+import { map } from 'rxjs/operators';
+@Injectable({
+  providedIn: 'root'
+})
+export class BooksService {
+  endPointURL: string =
+    'https://book-library-management-b46f2-default-rtdb.asia-southeast1.firebasedatabase.app/';
+  URL: string = this.endPointURL + 'category.json';
+  category: Category = { id: '', name: '', isDelete: 0 };
+  categories: Category[] = [];
+  isCreate: boolean = true;
+  errorHandling = new Subject<any>();
+  constructor(private http: HttpClient, private AuthService: AuthService) {}
+  
+  
+  
+  
+}

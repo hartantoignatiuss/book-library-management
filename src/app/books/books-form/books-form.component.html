@@ -1,0 +1,68 @@
+<mat-card>
+    <mat-card-header>
+      <h3 *ngIf="isCreate">Create Book</h3>
+      <h3 *ngIf="!isCreate">Edit Book</h3>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="book_name">Book Name*</label>
+            <input name="book_name"
+            class="form-control"
+            formControlName="book_name" required>
+            <span
+            *ngIf="!bookForm.get('book_name')!.valid && bookForm.get('book_name')!.touched"
+            class="danger">Book Name is required</span>
+          </div>
+
+          <div class="form-group">
+            <label for="bookpic">Book Cover</label>
+            <input name="bookpic"
+            class="form-control"
+            formControlName="bookpic">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category*</label>
+            <input name="category"
+            class="form-control"
+            formControlName="category" required>
+            <span
+            *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched"
+            class="danger">Category is required</span>
+          </div>
+
+          <div class="form-group">
+            <label for="rack">Rack*</label>
+            <input name="rack"
+            class="form-control"
+            formControlName="rack" required>
+            <span
+            *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched"
+            class="danger">Rack is required</span>
+          </div>
+
+          <div class="form-group">
+            <label for="stock">Stock*</label>
+            <input name="stock"
+            class="form-control"
+            formControlName="stock" required>
+            <span
+            *ngIf="!bookForm.get('stock')!.valid && bookForm.get('stock')!.touched"
+            class="danger">Stock is required</span>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!bookForm.valid">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+</mat-card>
+    
+<app-loader *ngIf="isLoading"></app-loader>
+    

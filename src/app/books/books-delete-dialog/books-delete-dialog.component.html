@@ -1,0 +1,19 @@
+
+<div mat-dialog-content>
+    Are you sure to delete this {{book.name}}
+    <div>
+      <button class="btn btn-danger"
+      (click)="onDeleteRack()">
+      Yes
+      </button>
+  
+      <button class="btn btn-primary">
+        No
+      </button>
+  
+  </div>
+  
+  
+  
+  <app-loader *ngIf="isLoading"></app-loader>
+  
