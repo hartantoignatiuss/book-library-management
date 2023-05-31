@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-header>
+      <h3>Member</h3>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <button
+      class="btn btn-primary"
+      (click)="onClickCreateButton()">
+      Create
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Member ID</th>
+          <th>Member Name</th>
+          <th>Type Indentity</th>
+          <th>Indetity ID</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="members.length===0">
+        <th
+        colspan="3"
+        style="text-align:center"
+        >No Data</th>
+      </tr>
+
+  
+  
+      <tr *ngFor="let member of members; let i = index">
+        <th>{{i+1}}</th>
+        <th>{{member.memberId}}</th>
+        <th>{{member.name}}</th>
+        <th>{{member.typeIndentity}}</th>
+        <th>{{member.identityId}}</th>
+        <th>{{member.address}}</th>
+        <th>{{member.gender}}</th>
+
+        <th>
+          <button class="btn btn-primary"
+          (click)="onClickEdit(member)">
+          Edit
+          </button>
+        </th>
+      </tr>
+    </tbody>
+    </table>
+  </mat-card-content>
+  
+  </mat-card>
+  
+  <app-loader *ngIf="isLoading"></app-loader>
+  
+  
+  
+  

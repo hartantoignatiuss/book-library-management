@@ -50,6 +50,12 @@ import { BooksMainComponent } from './books/books-main/books-main.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { BooksActionDialogComponent } from './books/books-action-dialog/books-action-dialog.component';
 import { BooksDeleteDialogComponent } from './books/books-delete-dialog/books-delete-dialog.component';
+import { MemberMainComponent } from './member/member-main/member-main.component';
+import { MemberFormComponent } from './member/member-form/member-form.component';
+import { MemberActionDialogComponent } from './member/member-action-dialog/member-action-dialog.component';
+import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
+import { PaddingPipe } from './pipe/padding.pipe';
+import { PaddingnewPipe } from './paddingnew.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +89,14 @@ import { BooksDeleteDialogComponent } from './books/books-delete-dialog/books-de
     BooksMainComponent,
     BooksFormComponent,
     BooksActionDialogComponent,
-    BooksDeleteDialogComponent
+    BooksDeleteDialogComponent,
+    AdminComponent,
+    MemberMainComponent,
+    MemberFormComponent,
+    MemberActionDialogComponent,
+    MemberNonactiveDialogComponent,
+    PaddingPipe,
+    PaddingnewPipe
   ],
   imports: [
     BrowserModule,
