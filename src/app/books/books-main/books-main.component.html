@@ -13,7 +13,9 @@
       <thead>
         <tr>
           <th>No</th>
+          <th>Book Cover</th>
           <th>Book Name</th>
+          <th>Book Stock</th>
           <th>Action</th>
       </tr>
     </thead>
@@ -27,7 +29,9 @@
   
       <tr *ngFor="let book of books; let i = index">
         <th>{{i+1}}</th>
+        <th>{{book.bookpic}}</th>
         <th>{{book.name}}</th>
+        <th>{{book.stock}}</th>
         <th>
           <button class="btn btn-primary"
           (click)="onClickEdit(book)">

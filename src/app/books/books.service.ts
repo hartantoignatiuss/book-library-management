@@ -1,12 +1,10 @@
 import { AuthService } from './../auth/auth.service';
-
-
-
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
 import { Book } from './books.model';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +12,11 @@ export class BooksService {
   endPointURL: string =
     'https://book-library-management-b46f2-default-rtdb.asia-southeast1.firebasedatabase.app/';
   URL: string = this.endPointURL + 'books.json';
-  book: Book = { id: '', name: '', isDelete: 0 };
-  books: Book[] = [];
-  isCreate: boolean = true;
   errorHandling = new Subject<any>();
+  books: Book[] = [];
+  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 };
+  isCreate: boolean = true;
+
   constructor(private http: HttpClient, private AuthService: AuthService) {}
   
   ngOnInit() {}
@@ -68,9 +67,9 @@ export class BooksService {
       );
   }
 
-  setBook(bookData: Book) {
-    this.book = bookData;
-  }
+  // setBook(bookData: Book) {
+  //   this.book = bookData;
+  // }
 
   setIsCreateValue(status: boolean) {
     this.isCreate = status;
@@ -97,6 +96,10 @@ export class BooksService {
                 id: key,
                 name: responseData[key].name,
                 isDelete: responseData[key].isDelete,
+                bookpic: responseData[key].bookpic,
+                category: responseData[key].category,
+                rack: responseData[key].rack,
+                stock: responseData[key].stock,
               };
             }
           }

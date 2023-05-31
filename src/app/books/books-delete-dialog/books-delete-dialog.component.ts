@@ -27,7 +27,11 @@ export class BooksDeleteDialogComponent {
     const rackData = {
       [this.book.id!] :{
         name : this.book.name,
-        isDelete : 1
+        isDelete : 1,
+        bookpic: this.book.bookpic,
+        category: this.book.category,
+        rack: this.book.rack,
+        stock: this.book.stock,
       }
     }
 

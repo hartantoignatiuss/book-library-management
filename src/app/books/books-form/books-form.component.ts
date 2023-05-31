@@ -1,6 +1,7 @@
 import { BooksActionDialogComponent } from '../books-action-dialog/books-action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subject, Observable, map } from 'rxjs';
 import { BooksService } from './../books.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, Input, ViewChild } from '@angular/core';
@@ -12,7 +13,9 @@ import { Book } from '../books.model';
   styleUrls: ['./books-form.component.css']
 })
 export class BooksFormComponent {
+  errorHandling = new Subject<any>();
   bookForm!: FormGroup;
+  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 };
   isCreate: boolean = true;
   isLoading: boolean = true;
 
@@ -23,6 +26,10 @@ export class BooksFormComponent {
   ) {
     this.bookForm = new FormGroup({
       book_name: new FormControl('',Validators.required),
+      bookpic: new FormControl(''),
+      category: new FormControl('',Validators.required),
+      rack: new FormControl('',Validators.required),
+      stock: new FormControl('',Validators.required),
     });
   }
 
@@ -37,6 +44,10 @@ export class BooksFormComponent {
         (responseData) => {
           this.bookForm = new FormGroup({
             book_name: new FormControl(responseData.name),
+            bookpic: new FormControl(responseData.bookpic),
+            category: new FormControl(responseData.category),
+            rack: new FormControl(responseData.rack),
+            stock: new FormControl(responseData.stock),
           });
           this.isLoading = false;
         }
@@ -52,7 +63,7 @@ export class BooksFormComponent {
 
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Success Create Book',
+          message: 'Success Create Book ' + book.name,
           isBack: true,
         },
       });
@@ -61,7 +72,7 @@ export class BooksFormComponent {
       this.isLoading = false;
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Fail Create Book. Please try again',
+          message: 'Fail Create Book' + book.name + '. Please try again',
           isBack: false,
         },
       });
@@ -77,7 +88,7 @@ export class BooksFormComponent {
     .subscribe((response) => {
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Succes Edit Book',
+          message: 'Succes Edit ' + book.name,
           isBack: true,
         },
       });
@@ -99,6 +110,10 @@ export class BooksFormComponent {
     const book: Book = {
       name: this.bookForm.value.book_name,
       isDelete: 0,
+      bookpic: "null",//this.bookForm.value.bookpic,
+      category: this.bookForm.value.category,
+      rack: this.bookForm.value.rack,
+      stock: this.bookForm.value.stock,
     };
 
     if (this.isCreate === true) {
