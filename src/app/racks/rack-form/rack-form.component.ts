@@ -4,11 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, Observable, map } from 'rxjs';
 import { RackService } from './../rack.service';
 import {
-  Component,
-  Input,
-  NgModule,
-  Output,
-  EventEmitter,
+  Component
 } from '@angular/core';
 import { Rack } from '../rack.model';
 import {

@@ -19,6 +19,8 @@ import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AppComponent } from './app.component';
+import { MemberMainComponent } from './member/member-main/member-main.component';
+import { MemberFormComponent } from './member/member-form/member-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent },
@@ -73,6 +75,23 @@ const appRoutes: Routes = [
           {
             path: 'create',
             component: UserFormComponent,
+          },
+        ],
+      },
+      {
+        path: 'member',
+        children: [
+          {
+            path: '',
+            component: MemberMainComponent,
+          },
+          {
+            path: 'create',
+            component: MemberFormComponent,
+          },
+          {
+            path: ':id/edit',
+            component: MemberFormComponent,
           },
         ],
       },

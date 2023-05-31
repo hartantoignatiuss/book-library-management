@@ -1,0 +1,68 @@
+<mat-card>
+    <mat-card-header>
+        <h3 *ngIf="isCreate">Create Member</h3>
+        <h3 *ngIf="!isCreate">Edit Member</h3>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="member_id">Member ID</label>
+                    <input name="member_id" class="form-control" formControlName="member_id" [readOnly]="true">
+                </div>
+                <div class="form-group">
+                    <label for="member_name">Name</label>
+                    <input name="member_name" class="form-control" formControlName="member_name">
+                    <span *ngIf="!memberForm.get('member_name')!.valid && memberForm.get('member_name')!.touched"
+                        class="danger">Name is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="type_indentity">Type Indentity</label>
+                    <input name="type_indentity" class="form-control" formControlName="type_indentity">
+                </div>
+                <span *ngIf="!memberForm.get('type_indentity')!.valid && memberForm.get('type_indentity')!.touched"
+                    class="danger">Indetity Name is required</span>
+
+                <div class="form-group">
+                    <label for="identity_id">Indentity ID</label>
+                    <input name="identity_id" class="form-control" formControlName="identity_id">
+                </div>
+                <span *ngIf="!memberForm.get('identity_id')!.valid && memberForm.get('identity_id')!.touched"
+                    class="danger">Indetity Id is required</span>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input name="address" class="form-control" formControlName="address">
+                </div>
+                <span *ngIf="!memberForm.get('address')!.valid && memberForm.get('address')!.touched"
+                    class="danger">Address is required</span>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control"
+                    formControlName="gender">
+                        <option [ngValue]="null" disabled>Choose Gender</option>
+                        <option *ngFor="let gender of genders" [ngValue]="gender">
+                            {{ gender }}
+                        </option>
+                    </select>
+                </div>
+                <span *ngIf="!memberForm.get('gender')!.valid && memberForm.get('gender')!.touched"
+                class="danger">Gender is required</span>
+
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" [disabled]="!memberForm.valid">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+
+</mat-card>
+
+<app-loader *ngIf="isLoading">
+</app-loader>
