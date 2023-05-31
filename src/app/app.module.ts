@@ -43,6 +43,9 @@ import { UserFormComponent } from './user/user-form/user-form.component';
 import { LoginComponent } from './login/login.component';
 import { LoginActionDialogComponent } from './login/login-action-dialog/login-action-dialog.component';
 import { AdminComponent } from './admin/admin.component';
+import { BooksMainComponent } from './books/books-main/books-main.component';
+import { BooksActionDialogComponent } from './books/books-action-dialog/books-action-dialog.component';
+import { BooksDeleteDialogComponent } from './books/books-delete-dialog/books-delete-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,10 @@ import { AdminComponent } from './admin/admin.component';
     UserFormComponent,
     LoginComponent,
     LoginActionDialogComponent,
-    AdminComponent
+    AdminComponent,
+    BooksMainComponent,
+    BooksActionDialogComponent,
+    BooksDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
