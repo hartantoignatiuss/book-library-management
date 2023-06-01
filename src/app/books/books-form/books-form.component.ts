@@ -27,6 +27,8 @@ export class BooksFormComponent {
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
   isCreate: boolean = true;
   isLoading: boolean = true;
+  selectedCat = '';
+  selectedRacs = '';
 
   constructor(
     private BooksService: BooksService,
@@ -44,7 +46,7 @@ export class BooksFormComponent {
       this.BooksService.getCategories().subscribe((categories: Category[]) => {
         this.categories = categories;
         this.isLoading = false;
-        // console.log(categories);
+        console.log(categories);
       });
   
       //load racks
@@ -72,14 +74,18 @@ export class BooksFormComponent {
             book_name: new FormControl(responseData.name),
             bookpic: new FormControl(responseData.bookpic),
             
-            category: new FormControl(this.getCategoryName(this.categories,responseData.category)),
-            rack: new FormControl(this.getRackName(this.racks,responseData.rack)),
+            category: new FormControl(this.getCategoryName(this.categories, responseData.category)),
+            rack: new FormControl(this.getRackName(this.racks, responseData.rack)),
             stock: new FormControl(responseData.stock),
           });
           this.isLoading = false;
         }
       );
     }
+    
+  }
+
+  ngAfterContentChecked(){
   }
 
   createBook(book:Book){
@@ -137,8 +143,8 @@ export class BooksFormComponent {
       name: this.bookForm.value.book_name,
       isDelete: 0,
       bookpic: "null",//this.bookForm.value.bookpic,
-      category: this.bookForm.value.category,
-      rack: this.bookForm.value.rack,
+      category: this.getCategoryID(this.categories,this.bookForm.value.category),
+      rack: this.getRackID(this.racks,this.bookForm.value.rack),
       stock: this.bookForm.value.stock,
     };
 
@@ -153,21 +159,15 @@ export class BooksFormComponent {
   getCategoryName(categories: Category[], category: string){
     let categoryName: string  = 'deleted';
     let length = categories.length;
-    console.log("valueC : " + category);
-    // let test = this.formatID("12345678900");
-    console.log("test: ");
-    console.log("test: " + length);
+    // console.log("valueC-loaded : " + category);
+    // console.log("test: " + length);
 
     for (let i = 0; i < length; i++) {
-      
-    console.log("test2 ");
-      // tempID = categories[i].id;
       if(categories[i].id?.startsWith("-")){
         // console.log("masuk sini dong");
-        // console.log(categories[i].id?.substring(1,categories[i].id?.length));
-        // console.log(this.formatID(category));
+        console.log(categories[i].id?.substring(1,categories[i].id?.length));
+        console.log(this.formatID(category));
         if(categories[i].id?.substring(1,categories[i].id?.length) === this.formatID(category)){
-          console.log(categories[i].id);
           return categories[i].name;
         }
       } else {
@@ -186,23 +186,61 @@ export class BooksFormComponent {
   getRackName(racks: Rack[], rack: string){
     let rackName: string  = 'deleted';
     let length = racks.length;
-    console.log("valueR : " + rack);
+    console.log("valueR-Loaded : " + rack);
+    console.log("test: " + length);
 
     for (let i = 0; i < length; i++) {
-      // tempID = categories[i].id;
       if(racks[i].id?.startsWith("-")){
+        console.log(racks[i].id?.substring(1,racks[i].id?.length));
+        console.log(this.formatID(rack));
         if(racks[i].id?.substring(1,racks[i].id?.length) === this.formatID(rack)){
-          console.log(racks[i].id);
+          // console.log(racks[i].id);
           return racks[i].name;
         }
       } else {
         if(racks[i].id === this.formatIDnonMin(rack)){
-        console.log(racks[i].id);
+        // console.log(racks[i].id);
         return racks[i].name;
         }
       }
     }
     return rackName;
+  }
+
+  getCategoryID(categories: Category[], category: string){
+    let categoryID: string = "error";
+    let length = categories.length;
+    console.log("UPvalueC : " + category);
+    console.log("test: ");
+    console.log("test: " + length);
+
+    for (let i = 0; i < length; i++) {
+      //compare name
+      if(categories[i].name === category){
+        console.log(categories[i].name);
+        console.log(categories[i].id);
+        categoryID = categories[i].id + "";
+        return categoryID;
+      }
+    }
+    return categoryID;
+  }
+
+  getRackID(racks: Rack[], rack: string){
+    let rackID: string = "error";
+    let length = racks.length;
+    console.log("UPvalueR : " + rack);
+
+    for (let i = 0; i < length; i++) {
+      //compare name
+      if(racks[i].name === rack){
+        console.log(racks[i].name);
+        console.log(racks[i].id);
+        rackID = racks[i].id + "";
+        return rackID;
+      }
+    }
+    return rackID;
   }
 
   formatID(ID: string){
@@ -225,5 +263,9 @@ export class BooksFormComponent {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  test(){
+    console.log("print test: " + this.getRackID(this.racks,this.bookForm.value.rack));
   }
 }

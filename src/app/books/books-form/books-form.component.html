@@ -23,41 +23,33 @@
             class="form-control"
             formControlName="bookpic">
           </div>
-
-          <div class="form-group">
-            <label for="category">Category*</label>
-            <input name="category"
-            class="form-control"
+          
+          <br>
+          <mat-form-field class="form-group">
+            <mat-label>Category-option*</mat-label>
+            <select matNativeControl class="form-control"
             formControlName="category" required>
-            <span
-            *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched"
-            class="danger">Category is required</span>
-          </div>
-          <mat-form-field>
-            <mat-label>Category-option</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let cats of categories" [value]="category.name">
-                {{category.name}}
-              </mat-option>
-            </mat-select>
+            <option>deleted</option>
+              <option *ngFor="let cats of categories" [value]="cats.name">
+                {{cats.name}}
+              </option>
+            </select>
+            <mat-error *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched">
+              Category is required</mat-error>
           </mat-form-field>
 
-          <div class="form-group">
-            <label for="rack">Rack*</label>
-            <input name="rack"
-            class="form-control"
+          <br>
+          <mat-form-field class="form-group">
+            <mat-label>Rack-option*</mat-label>
+            <select matNativeControl class="form-control"
             formControlName="rack" required>
-            <span
-            *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched"
-            class="danger">Rack is required</span>
-          </div>
-          <mat-form-field>
-            <mat-label>Rack-option</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let racs of racks" [value]="rack.name">
-                {{rack.name}}
-              </mat-option>
-            </mat-select>
+              <option>deleted</option>
+              <option *ngFor="let racs of racks" [value]="racs.name">
+                {{racs.name}}
+              </option>
+            </select>
+            <mat-error *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched">
+              Rack is required</mat-error>
           </mat-form-field>
 
           <div class="form-group">
