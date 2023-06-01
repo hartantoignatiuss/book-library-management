@@ -57,6 +57,8 @@ import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog
 import { PaddingPipe } from './pipe/padding.pipe';
 import { PaddingnewPipe } from './paddingnew.pipe';
 import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
+import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete-dialog.component';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +100,8 @@ import { UserActionDialogComponent } from './user/user-action-dialog/user-action
     MemberNonactiveDialogComponent,
     PaddingPipe,
     PaddingnewPipe,
-    UserActionDialogComponent
+    UserActionDialogComponent,
+    UserDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +120,7 @@ import { UserActionDialogComponent } from './user/user-action-dialog/user-action
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [ShoppingListService, RecipeService,
     {

@@ -8,24 +8,19 @@
     <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
       <div class="modal-body">
         <div class="form-group">
-          <label for="category_name">Category Name</label>
-          <input
-            name="category_name"
-            class="form-control"
-            formControlName="category_name"
-            required
-          />
-          <span
-            *ngIf="
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Category Name</mat-label>
+            <input matInput formControlName="category_name" />
+            <mat-error *ngIf="
               !categoryForm.get('category_name')!.valid &&
-              categoryForm.get('category_name')!.touched
-            "
-            class="danger"
-            >Name is required</span
-          >
+              categoryForm.get('category_name')!.touched && 
+              categoryForm.get('category_name')?.errors?.['required']
+            ">
+Name is required</mat-error>
+          </mat-form-field>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" type="submit">Save</button>
+          <button mat-raised-button color="primary"  type="submit">Save</button>
         </div>
       </div>
     </form>

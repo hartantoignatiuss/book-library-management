@@ -4,8 +4,7 @@
     </mat-card-header>
   
     <mat-card-content>
-      <button
-      class="btn btn-primary"
+      <button mat-stroked-button color="primary"
       (click)="onClickCreateButton()">
       Create
     </button>
@@ -15,8 +14,6 @@
         <th>No</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Status</th>
-        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -31,26 +28,6 @@
         <th>{{i+1}}</th>
         <th>{{adm.name}}</th>
         <th>{{adm.email}}</th>
-        <th>
-          <span *ngIf="adm.isActive" class="alert alert-success">Active</span>
-          <span *ngIf="!adm.isActive" class="alert alert-primary">Non Active</span>
-        </th>
-        <th>
-          <button class="btn btn-primary"
-          (click)="onClickEdit(adm)"
-          *ngIf="adm.isActive" >
-          Delete Admin
-          </button>
-
-          <button class="btn btn-primary"
-          (click)="onClickEdit(adm)"
-          *ngIf="!adm.isActive" >
-          Active Admin
-          </button>
-          <!-- <button class="btn btn-danger"
-          (click)="onClickDelete(adm)">Delete</button> -->
-  
-        </th>
       </tr>
     </tbody>
     </table>

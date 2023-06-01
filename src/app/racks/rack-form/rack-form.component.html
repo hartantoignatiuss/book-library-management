@@ -4,40 +4,44 @@
     <h3 *ngIf="!isCreate">Edit Rack</h3>
   </mat-card-header>
 
-
   <mat-card-content>
     <form [formGroup]="rackForm" (ngSubmit)="onSubmit()">
       <div class="modal-body">
         <div class="form-group">
-          <label for="rack_name">Name</label>
-          <input name="rack_name"
-          class="form-control"
-          formControlName="rack_name">
-          <span
-          *ngIf="!rackForm.get('rack_name')!.valid && rackForm.get('rack_name')!.touched"
-          class="danger">Name is required</span>
-        </div>
+        <mat-form-field [style.width.px]=327>
+          <mat-label>Input</mat-label>
+          <input matInput formControlName="rack_name">
+          <mat-error *ngIf="!rackForm.get('rack_name')!.valid && 
+          rackForm.get('rack_name')!.touched&&rackForm.get('rack_name')?.errors?.['required']"
+          >
+            Name is required
+          </mat-error>
+          <mat-error *ngIf="!rackForm.get('rack_name')!.valid && 
+          rackForm.get('rack_name')!.touched&&rackForm.get('rack_name')?.errors?.['nameIsExist']">
+            Name is exist
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+        <mat-form-field [style.width.px]=327>
+          <mat-label>Location</mat-label>
+          <input matInput formControlName="location">
+          <mat-error *ngIf="!rackForm.get('location')!.valid && 
+            rackForm.get('location')!.touched">
+            Location is required
+          </mat-error>
+        </mat-form-field>
+
         <div class="form-group">
-          <label for="location">Location</label>
-          <input name="location"
-          class="form-control"
-          formControlName="location">
-        </div>
-        <span
-        *ngIf="!rackForm.get('location')!.valid && rackForm.get('location')!.touched"
-        class="danger">Location is required</span>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit" [disabled]="!rackForm.valid">
+          <button  mat-raised-button color="primary" type="submit" [disabled]="!rackForm.valid">
             Save
           </button>
         </div>
       </div>
     </form>
-</mat-card-content>
+  </mat-card-content>
 
 </mat-card>
 
 <app-loader *ngIf="isLoading">
 </app-loader>
-
-

@@ -34,21 +34,7 @@ export class UserMainComponent {
     // this.passingDataOut.emit('created');
   }
 
-  onClickEdit(admin:Admin){
-    this.router.navigate(['admin','users',admin.id,'edit']);
+  onDelete(admin:Admin){
+    
   }
-
-  // onClickDelete(rackData:Admin){
-  //   const dialogRef = this.dialog.open(RackDeleteDialogComponent, {
-  //     data:rackData,
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(() => {
-  //     this.isLoading = true;
-  //     this.UserService.getRacks().subscribe((racks:Rack[])=>{
-  //       this.racks =racks;
-  //       this.isLoading =false;
-  //     });
-  //   });
-  // }
 }
