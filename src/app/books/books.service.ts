@@ -90,12 +90,13 @@ export class BooksService {
   setFormValue(bookData: Book) {
     this.book = bookData;
   }
+  
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
   getBookById(id: string) {
-    // let category:Category = this.categories.find(i => i.id === id) || ;
-    // return category;
-    // console.log(this, this.books);
-
+    this.delay(2200);
     return this.http
       .get(this.URL, {
         params: new HttpParams().set('auth', this.AuthService.getAuthToken()),
