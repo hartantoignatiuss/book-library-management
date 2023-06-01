@@ -37,7 +37,7 @@ export class LoginComponent {
     this.AuthService.login(authRequestData).subscribe(
       (response) => {
         this.isLoading = false;
-        this.router.navigate(['admin','categories']);
+        this.router.navigate(['admin','books']);
       },
       (error) => {
         this.isLoading = false;

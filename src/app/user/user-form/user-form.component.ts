@@ -3,6 +3,9 @@ import { UserService } from './../user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { formatPercent } from '@angular/common';
+import { Admin } from '../admin.model';
+import { MatDialog } from '@angular/material/dialog';
+import { UserActionDialogComponent } from '../user-action-dialog/user-action-dialog.component';
 
 @Component({
   selector: 'app-user-form',
@@ -14,9 +17,11 @@ export class UserFormComponent {
   userForm!: FormGroup;
   isLoading:boolean=false;
 
+
   constructor(
     private UserService: UserService,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private dialog: MatDialog
   ){}
 
   ngOnInit(){
@@ -33,22 +38,35 @@ export class UserFormComponent {
 
   createAdmin(){
 
+
   }
 
   onSubmit(){
-    const email = this.userForm.value.email;
-    const password = this.userForm.value.email;
-
     const createAuthUserData: AuthRequestData = {
-      email:'superadmin@gmail.com',
-      password:'test123',
-      returnSecureToken :true,
+      email:this.userForm.value.email,
+      password:this.userForm.value.password,
+      returnSecureToken :false,
     }
     console.log(createAuthUserData);
 
     this.AuthService.createAuth(createAuthUserData)
     .subscribe(response=>{
+      const adminData:Admin  = {
+        name : this.userForm.value.user_name,
+        email:this.userForm.value.email,
+        isActive:true
+      }
+      this.UserService.createAdmin(adminData)
+      .subscribe(response=>{
+        this.isLoading = false;
 
+        this.dialog.open(UserActionDialogComponent, {
+          data: {
+            message: 'Success Create User',
+            isBack: true,
+          },
+        });
+      });
     });
 
 

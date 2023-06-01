@@ -84,7 +84,7 @@ const appRoutes: Routes = [
         ],
       },
       {
-        path: 'user',
+        path: 'users',
         children: [
           {
             path: '',
