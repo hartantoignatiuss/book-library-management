@@ -10,9 +10,7 @@ import { Rack } from '../rack.model';
 import {
   FormGroup,
   FormControl,
-  Validators,
-  ReactiveFormsModule,
-  
+  Validators,  
 } from '@angular/forms';
 
 @Component({
@@ -20,8 +18,7 @@ import {
   templateUrl: './rack-form.component.html',
   styleUrls: ['./rack-form.component.css'],
 })
-export class RackFormComponent {
-  errorHandling = new Subject<any>();
+export class RackFormComponent {                 
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
   rackDataWillUpdated: Rack = { id: '', name: '', location: '', isDelete: 0 };
   rackForm!: FormGroup;
@@ -78,7 +75,6 @@ export class RackFormComponent {
      } else{
       return null;
      }
-
   }
 
   createRack(rack: Rack) {
@@ -112,6 +108,7 @@ export class RackFormComponent {
     };
     this.RackService.update(data)
     .subscribe((response) => {
+      this.isLoading =false;
         this.dialog.open(RackActionDialogComponent, {
           data: {
             message: 'Succes Edit Racks',

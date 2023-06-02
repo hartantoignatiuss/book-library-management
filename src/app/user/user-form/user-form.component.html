@@ -12,11 +12,9 @@
           <mat-form-field [style.width.px]=327>
             <mat-label>Name</mat-label>
             <input matInput formControlName="user_name">
-
-            <!-- <mat-error *ngIf="!rackForm.get('user_name')!.valid && 
-            rackForm.get('user_name')!.touched&&rackForm.get('user_name')?.errors?.['required']">
+            <mat-error *ngIf="!userForm.get('user_name')!.valid && userForm.get('user_name')!.touched && userForm.get('user_name')?.errors?.['required']">
               Name is required
-            </mat-error> -->
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -25,8 +23,14 @@
             <mat-label>Email</mat-label>
             <input matInput formControlName="email">
 
-            <mat-error *ngIf="!userForm.get('email')!.valid && userForm.get('email')!.touched">
-              Name is required
+            <mat-error *ngIf="!userForm.get('email')!.valid && userForm.get('email')!.touched && userForm.get('email')?.errors?.['required']">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="!userForm.get('email')!.valid && userForm.get('email')!.touched && userForm.get('email')?.errors?.['emailIsExist']">
+              Email is exist
+            </mat-error>
+            <mat-error *ngIf="!userForm.get('email')!.valid && userForm.get('email')!.touched && userForm.get('email')?.errors?.['email']">
+              Email is not on valid format
             </mat-error>
           </mat-form-field>
         </div>
@@ -37,7 +41,7 @@
             <mat-label>Password</mat-label>
             <input matInput formControlName="password">
 
-            <mat-error *ngIf="!userForm.get('password')!.valid && userForm.get('password')!.touched">
+            <mat-error *ngIf="!userForm.get('password')!.valid && userForm.get('password')!.touched && userForm.get('password')?.errors?.['required']">
               Password is required
             </mat-error>
           </mat-form-field>
@@ -47,18 +51,22 @@
           <mat-form-field [style.width.px]=327>
             <mat-label>Confirm Password</mat-label>
             <input matInput formControlName="confirmPassword">
-
-            <mat-error *ngIf="!userForm.get('confirmPassword')!.valid && userForm.get('confirmPassword')!.touched">
-              Confirm Password is required
+ 
+            <mat-error *ngIf="!userForm.get('confirmPassword')!.valid && userForm.get('confirmPassword')!.touched  && userForm.get('confirmPassword')?.errors?.['required']">
+             Confirm Password are not match
             </mat-error>
 
-            <mat-error *ngIf="!userForm.get('confirmPassword')!.valid && userForm.get('confirmPassword')!.touched">
-              Confirm Password is required
+            <mat-error *ngIf="!userForm.get('confirmPassword')!.valid && userForm.get('confirmPassword')!.touched  && userForm.get('confirmPassword')?.errors?.['mismatch']">
+              Password and Confirm Password are not match
             </mat-error>
           </mat-form-field>
         </div>
+
+        <!-- <mat-error *ngIf="userForm.hasError('mismatch')">
+          Password and Confirm Password are not match
+        </mat-error> -->
         <div class="form-group">
-          <button mat-raised-button color="primary" type="submit">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">
             Save
           </button>
         </div>

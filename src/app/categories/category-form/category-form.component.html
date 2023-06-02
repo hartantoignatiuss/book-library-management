@@ -16,11 +16,17 @@
               categoryForm.get('category_name')!.touched && 
               categoryForm.get('category_name')?.errors?.['required']
             ">
-Name is required</mat-error>
+              Name is required</mat-error>
+              <mat-error *ngIf="
+              !categoryForm.get('category_name')!.valid &&
+              categoryForm.get('category_name')!.touched && 
+              categoryForm.get('category_name')?.errors?.['nameIsExist']
+            ">
+              Name is exist</mat-error>
           </mat-form-field>
         </div>
         <div class="form-group">
-          <button mat-raised-button color="primary"  type="submit">Save</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!categoryForm.valid">Save</button>
         </div>
       </div>
     </form>

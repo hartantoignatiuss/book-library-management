@@ -27,6 +27,10 @@
 .avatar-container{
   display:flex;
 }
+
+.active {
+  font-weight: bold;
+}
 /* .mat-drawer-inner-container{
   width:200px
 } */

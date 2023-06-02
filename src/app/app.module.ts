@@ -55,10 +55,14 @@ import { MemberFormComponent } from './member/member-form/member-form.component'
 import { MemberActionDialogComponent } from './member/member-action-dialog/member-action-dialog.component';
 import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
 import { PaddingPipe } from './pipe/padding.pipe';
-import { PaddingnewPipe } from './paddingnew.pipe';
 import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
 import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
+import { MainComponent } from './main/main.component';
+import { PublicComponent } from './public/public.component';
+import { PublicBooksComponent } from './public/public-books/public-books.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { ShortenPipe } from './pipe/shorten.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,9 +103,12 @@ import {MatButtonModule} from '@angular/material/button';
     MemberActionDialogComponent,
     MemberNonactiveDialogComponent,
     PaddingPipe,
-    PaddingnewPipe,
     UserActionDialogComponent,
-    UserDeleteDialogComponent
+    UserDeleteDialogComponent,
+    MainComponent,
+    PublicComponent,
+    PublicBooksComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,
@@ -120,7 +127,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [ShoppingListService, RecipeService,
     {

@@ -23,9 +23,11 @@ import { BooksMainComponent } from './books/books-main/books-main.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { MemberMainComponent } from './member/member-main/member-main.component';
 import { MemberFormComponent } from './member/member-form/member-form.component';
+import { MainComponent } from './main/main.component';
+import { PublicComponent } from './public/public.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: PublicComponent },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {
     path: 'admin',
