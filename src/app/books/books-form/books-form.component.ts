@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subject, Observable, map } from 'rxjs';
 import { BooksService } from './../books.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Book } from '../books.model';
 import { Category } from './../../categories/category.model';
 import { Rack } from './../../racks/rack.model';
@@ -27,8 +27,6 @@ export class BooksFormComponent {
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
   isCreate: boolean = true;
   isLoading: boolean = true;
-  selectedCat = '';
-  selectedRacs = '';
 
   constructor(
     private BooksService: BooksService,
@@ -263,9 +261,5 @@ export class BooksFormComponent {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
-  }
-
-  test(){
-    console.log("print test: " + this.getRackID(this.racks,this.bookForm.value.rack));
   }
 }

@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-header>
+      <h3>--Welcome to BCA Library PROJECT--</h3>
+    </mat-card-header>
+  
+    <mat-card-content>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Book Cover</th>
+          <th>Book Name</th>
+          <th>Rack</th>
+          <th>Stock Avail</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="books.length===0">
+        <th
+        colspan="3"
+        style="text-align:center"
+        >No Book to rental</th>
+      </tr>
+  
+      <tr *ngFor="let book of books; let i = index">
+        <th>{{i+1}}</th>
+        <th>{{book.bookpic}}</th>
+        <th>{{book.name}}</th>
+        <th>{{book.rack}}</th>
+        <th>{{book.stock}}</th>
+        <th>
+          <button class="btn btn-primary"
+          (click)="onClickEdit(book)">
+          Edit
+          </button>
+          <button class="btn btn-danger"
+          (click)="onClickDelete(book)">Delete</button>
+        </th>
+      </tr>
+    </tbody>
+    </table>
+  </mat-card-content>
+  
+  </mat-card>
+  
+  <app-loader *ngIf="isLoading"></app-loader>

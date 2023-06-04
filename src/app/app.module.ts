@@ -56,6 +56,7 @@ import { MemberActionDialogComponent } from './member/member-action-dialog/membe
 import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
 import { PaddingPipe } from './pipe/padding.pipe';
 import { PaddingnewPipe } from './paddingnew.pipe';
+import { RentalMainComponent } from './rental-main/rental-main.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +97,8 @@ import { PaddingnewPipe } from './paddingnew.pipe';
     MemberActionDialogComponent,
     MemberNonactiveDialogComponent,
     PaddingPipe,
-    PaddingnewPipe
+    PaddingnewPipe,
+    RentalMainComponent
   ],
   imports: [
     BrowserModule,
