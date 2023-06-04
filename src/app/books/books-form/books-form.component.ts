@@ -44,6 +44,7 @@ export class BooksFormComponent {
       this.BooksService.getCategories().subscribe((categories: Category[]) => {
         this.categories = categories;
         this.isLoading = false;
+        console.log("cats");
         console.log(categories);
       });
   
@@ -51,13 +52,12 @@ export class BooksFormComponent {
       this.BooksService.getRacks().subscribe((racks:Rack[])=>{
         this.racks =racks;
         this.isLoading =false;
-        // console.log(racks);
+        console.log("racs");
+        console.log(racks);
       });
   }
 
   ngOnInit() {
-
-    this.delay(20000);
 
     //handle create vs edit
     if (this.route.snapshot.params['id'] === undefined) {
@@ -77,6 +77,7 @@ export class BooksFormComponent {
             stock: new FormControl(responseData.stock),
           });
           this.isLoading = false;
+          console.log("cari ini :" + this.getRackName(this.racks, responseData.rack));
         }
       );
     }
@@ -159,19 +160,20 @@ export class BooksFormComponent {
     let length = categories.length;
     // console.log("valueC-loaded : " + category);
     // console.log("test: " + length);
+    this.delay(1000);
+    this.delay(1000);
 
     for (let i = 0; i < length; i++) {
       if(categories[i].id?.startsWith("-")){
         // console.log("masuk sini dong");
+        console.log("cats: " + categories[i].id);
+        console.log("cats-input: " + this.formatIDnonMin(category));
         console.log(categories[i].id?.substring(1,categories[i].id?.length));
         console.log(this.formatID(category));
         if(categories[i].id?.substring(1,categories[i].id?.length) === this.formatID(category)){
           return categories[i].name;
         }
       } else {
-        // console.log("masuk sini22 dong");
-        // console.log(categories[i].id);
-        // console.log(this.formatIDnonMin(category));
         if(categories[i].id === this.formatIDnonMin(category)){
           console.log(categories[i].id);
           return categories[i].name;
@@ -186,11 +188,12 @@ export class BooksFormComponent {
     let length = racks.length;
     console.log("valueR-Loaded : " + rack);
     console.log("test: " + length);
+    this.delay(1000);
 
     for (let i = 0; i < length; i++) {
       if(racks[i].id?.startsWith("-")){
-        console.log(racks[i].id?.substring(1,racks[i].id?.length));
-        console.log(this.formatID(rack));
+        console.log("racs: " + racks[i].id?.substring(1,racks[i].id?.length));
+        console.log("racs - input: " + this.formatID(rack));
         if(racks[i].id?.substring(1,racks[i].id?.length) === this.formatID(rack)){
           // console.log(racks[i].id);
           return racks[i].name;
