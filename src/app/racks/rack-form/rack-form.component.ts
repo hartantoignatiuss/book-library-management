@@ -10,8 +10,7 @@ import { Rack } from '../rack.model';
 import {
   FormGroup,
   FormControl,
-  Validators,
-  ReactiveFormsModule,
+  Validators,  
 } from '@angular/forms';
 
 @Component({
@@ -19,12 +18,13 @@ import {
   templateUrl: './rack-form.component.html',
   styleUrls: ['./rack-form.component.css'],
 })
-export class RackFormComponent {
-  errorHandling = new Subject<any>();
+export class RackFormComponent {                 
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
+  rackDataWillUpdated: Rack = { id: '', name: '', location: '', isDelete: 0 };
   rackForm!: FormGroup;
   isLoading: boolean = true;
   isCreate: boolean = true;
+  existRacks: Rack[] = [];
 
   constructor(
     private RackService: RackService,
@@ -32,12 +32,17 @@ export class RackFormComponent {
     private dialog: MatDialog
   ) {
     this.rackForm = new FormGroup({
-      rack_name: new FormControl('', [Validators.required]),
+      rack_name: new FormControl('', [Validators.required,this.checkRackNameIsExist.bind(this)]),
       location: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit() {
+    this.RackService.getRacks()
+    .subscribe(response=>{
+      this.existRacks = response;
+    });
+
     if (this.route.snapshot.params['id'] === undefined) {
       this.isCreate = true;
       this.isLoading = false;
@@ -45,9 +50,10 @@ export class RackFormComponent {
       this.isCreate = false;
       this.RackService.getRackByID(this.route.snapshot.params['id']).subscribe(
         (responseData) => {
+          this.rackDataWillUpdated =responseData;
           this.rackForm = new FormGroup({
-            rack_name: new FormControl(responseData.name),
-            location: new FormControl(responseData.location),
+            rack_name: new FormControl(responseData.name,  [Validators.required,this.checkRackNameIsExist.bind(this)]),
+            location: new FormControl(responseData.location,Validators.required),
           });
           this.isLoading = false;
         }
@@ -55,16 +61,20 @@ export class RackFormComponent {
     }
   }
 
-  checkRackNameIsExist(control: FormGroup): Observable<any | null> {
-    return this.RackService.checkRackNameIsExist(control.value.rack_name).pipe(
-      map((result: boolean) => {
-        if (result === true) {
-          return { rackNameIsExist: true };
-        } else {
-          return null;
-        }
-      })
-    );
+  checkRackNameIsExist(control: FormGroup): null |{[s:string]:boolean} {
+    const rackName = control.value;
+    
+    if(this.rackDataWillUpdated.name !== '' && this.rackDataWillUpdated.name==rackName){
+      return null;
+    }
+
+    const isExist = this.existRacks.some(existRack => String(existRack.name) === String(rackName));
+
+    if(isExist === true){
+      return{'nameIsExist': isExist};
+     } else{
+      return null;
+     }
   }
 
   createRack(rack: Rack) {
@@ -98,6 +108,7 @@ export class RackFormComponent {
     };
     this.RackService.update(data)
     .subscribe((response) => {
+      this.isLoading =false;
         this.dialog.open(RackActionDialogComponent, {
           data: {
             message: 'Succes Edit Racks',
@@ -118,7 +129,6 @@ export class RackFormComponent {
   }
 
   onSubmit() {
-    console.log(this.rackForm);
     this.isLoading = true;
     const rack: Rack = {
       name: this.rackForm.value.rack_name,

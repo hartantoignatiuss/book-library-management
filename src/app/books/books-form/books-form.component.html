@@ -1,76 +1,83 @@
 <mat-card>
-    <mat-card-header>
-      <h3 *ngIf="isCreate">Create Book</h3>
-      <h3 *ngIf="!isCreate">Edit Book</h3>
-    </mat-card-header>
-  
-    <mat-card-content>
-      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="book_name">Book Name*</label>
-            <input name="book_name"
-            class="form-control"
-            formControlName="book_name" required>
-            <span
-            *ngIf="!bookForm.get('book_name')!.valid && bookForm.get('book_name')!.touched"
-            class="danger">Book Name is required</span>
-          </div>
+  <mat-card-header>
+    <h3 *ngIf="isCreate">Create Book</h3>
+    <h3 *ngIf="!isCreate">Edit Book</h3>
+  </mat-card-header>
 
-          <div class="form-group">
-            <label for="bookpic">Book Cover</label>
-            <input name="bookpic"
-            class="form-control"
-            formControlName="bookpic">
-          </div>
-          
-          <br>
-          <mat-form-field class="form-group">
-            <mat-label>Category-option*</mat-label>
-            <select matNativeControl class="form-control"
-            formControlName="category" required>
-            <option>deleted</option>
-              <option *ngFor="let cats of categories" [value]="cats.name">
+  <mat-card-content>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="modal-body">
+        <div class="form-group">
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Book Name</mat-label>
+            <input matInput formControlName="book_name">
+            <mat-error *ngIf="!bookForm.get('book_name')!.valid && bookForm.get('book_name')!.touched">
+              Book is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Book Cover</mat-label>
+            <input matInput formControlName="bookpic">
+            <!-- <mat-error *ngIf="!bookForm.get('book_name')!.valid && bookForm.get('book_name')!.touched"
+              >
+                Book is required
+              </mat-error> -->
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-group">
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Category Option</mat-label>
+            <mat-select formControlName="category" >
+              <mat-option>deleted</mat-option>
+              <mat-option *ngFor="let cats of categories" [value]="cats.name">
                 {{cats.name}}
-              </option>
-            </select>
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched">
               Category is required</mat-error>
           </mat-form-field>
+        </div>
 
-          <br>
-          <mat-form-field class="form-group">
-            <mat-label>Rack-option*</mat-label>
-            <select matNativeControl class="form-control"
-            formControlName="rack" required>
-              <option>deleted</option>
-              <option *ngFor="let racs of racks" [value]="racs.name">
+
+
+        <div class="form-group">
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Rack Option</mat-label>
+            <mat-select formControlName="rack" >
+              <mat-option>deleted</mat-option>
+              <mat-option *ngFor="let racs of racks" [value]="racs.name">
                 {{racs.name}}
-              </option>
-            </select>
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched">
               Rack is required</mat-error>
           </mat-form-field>
-
-          <div class="form-group">
-            <label for="stock">Stock*</label>
-            <input name="stock"
-            class="form-control"
-            formControlName="stock" required>
-            <span
-            *ngIf="!bookForm.get('stock')!.valid && bookForm.get('stock')!.touched"
-            class="danger">Stock is required</span>
-          </div>
-
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!bookForm.valid">
-              Save
-            </button>
-          </div>
         </div>
-      </form>
-    </mat-card-content>
+
+        <div class="form-group">
+          <mat-form-field [style.width.px]=327>
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock">
+            <mat-error *ngIf="!bookForm.get('stock')!.valid && bookForm.get('stock')!.touched">
+              Book is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit" [disabled]="!bookForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
 </mat-card>
-    
+
 <app-loader *ngIf="isLoading"></app-loader>
-    

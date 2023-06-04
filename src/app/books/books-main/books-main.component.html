@@ -4,8 +4,7 @@
     </mat-card-header>
   
     <mat-card-content>
-      <button
-      class="btn btn-primary"
+      <button mat-stroked-button color="primary"
       (click)="onClickCreateButton()">
       Create
     </button>
@@ -33,11 +32,11 @@
         <th>{{book.name}}</th>
         <th>{{book.stock}}</th>
         <th>
-          <button class="btn btn-primary"
+          <button mat-raised-button color="primary"
           (click)="onClickEdit(book)">
           Edit
           </button>
-          <button class="btn btn-danger"
+          <button mat-raised-button color="danger"
           (click)="onClickDelete(book)">Delete</button>
         </th>
       </tr>

@@ -81,10 +81,6 @@ export class CategoryService {
   }
 
   getCategoryById(id: string) {
-    // let category:Category = this.categories.find(i => i.id === id) || ;
-    // return category;
-
-    console.log(this, this.categories);
     return this.http
       .get(this.URL, {
         params: new HttpParams().set('auth', this.AuthService.getAuthToken()),

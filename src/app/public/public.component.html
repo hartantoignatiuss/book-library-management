@@ -1,0 +1,37 @@
+<mat-toolbar>
+  <span>PROJECT - Book Library Management</span>
+  <span class="example-spacer"></span>
+
+  <a [routerLink]="['login']" mat-raised-button color="primary"> Login</a>
+
+</mat-toolbar>
+
+<!-- <mat-toolbar>
+  <div >
+    <span>PROJECT - Book Library Management</span>
+   
+  </div> -->
+
+<!-- </mat-toolbar> -->
+
+<div class="container">
+  <div fxLayout="row wrap">
+    <div fxFlex="25%" *ngFor="let book of books">
+      <mat-card class="books-container">
+        <img mat-card-image src="../../assets/image/noImage.jpg">
+        <mat-card-header class="title">
+          <mat-card-title>{{book.name | shorten:[20, '...']}}</mat-card-title>
+        </mat-card-header>
+        <!-- <mat-card-content>
+          <div>Category : {{book.category}}</div>
+          <div>Racks : {{book.rack}}</div>
+          <div>Stocks : {{book.stock}}</div>
+        </mat-card-content> -->
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+<br>
+
+<app-loader *ngIf="isLoading"></app-loader>

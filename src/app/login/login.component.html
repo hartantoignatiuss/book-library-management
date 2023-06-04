@@ -1,45 +1,43 @@
+<mat-toolbar>
+  <span>PROJECT - Book Library Management</span>
+</mat-toolbar>
 <mat-card>
-  <mat-card-header>
-    <h1>Login</h1>
-    <br>
-    <br>
-  </mat-card-header>
+  <div class="form-container">
+    <mat-card-content>
 
+      <h1>Login</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <mat-form-field [style.width.px]=327>
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+              <mat-error *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field [style.width.px]=327>
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password">
+              <mat-error *ngIf="!loginForm.get('password')!.valid && loginForm.get('password')!.touched">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
 
-  <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input name="email"
-          class="form-control"
-          formControlName="email">
-          <span
-          *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched"
-          class="danger">Email is required</span>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input name="password"
-          type="password"
-          class="form-control"
-          formControlName="password">
-        </div>
-        <span
-        *ngIf="!loginForm.get('password')!.valid && loginForm.get('password')!.touched"
-        class="danger">Password is required</span>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
-            Save
-          </button>
-        </div>
-      </div>
-    </form>
-</mat-card-content>
+    </mat-card-content>
+  </div>
 
 </mat-card>
 
 <app-loader *ngIf="isLoading">
 </app-loader>
-
-

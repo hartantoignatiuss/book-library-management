@@ -55,8 +55,19 @@ import { MemberFormComponent } from './member/member-form/member-form.component'
 import { MemberActionDialogComponent } from './member/member-action-dialog/member-action-dialog.component';
 import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
 import { PaddingPipe } from './pipe/padding.pipe';
+<<<<<<< HEAD
 import { PaddingnewPipe } from './paddingnew.pipe';
 import { RentalMainComponent } from './rental-main/rental-main.component';
+=======
+import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
+import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete-dialog.component';
+import {MatButtonModule} from '@angular/material/button';
+import { MainComponent } from './main/main.component';
+import { PublicComponent } from './public/public.component';
+import { PublicBooksComponent } from './public/public-books/public-books.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { ShortenPipe } from './pipe/shorten.pipe';
+>>>>>>> hartanto
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,8 +108,17 @@ import { RentalMainComponent } from './rental-main/rental-main.component';
     MemberActionDialogComponent,
     MemberNonactiveDialogComponent,
     PaddingPipe,
+<<<<<<< HEAD
     PaddingnewPipe,
     RentalMainComponent
+=======
+    UserActionDialogComponent,
+    UserDeleteDialogComponent,
+    MainComponent,
+    PublicComponent,
+    PublicBooksComponent,
+    ShortenPipe
+>>>>>>> hartanto
   ],
   imports: [
     BrowserModule,
@@ -117,6 +137,8 @@ import { RentalMainComponent } from './rental-main/rental-main.component';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [ShoppingListService, RecipeService,
     {

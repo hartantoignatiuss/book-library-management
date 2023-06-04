@@ -1,30 +1,48 @@
-<div style="width:200px"><ul>
-  <mat-list>
-    <mat-list-item>
-      <a class="nav-link" [routerLink]="['books']">
+<div style="width:200px">
+  <ul>
+    <mat-list>
+      <!-- <mat-list-item>
+          <div class="avatar-container">
+            <div class="initial-avatar">H</div>
+            <span>   
+               cndjkslcn
+            </span>  
+          </div> -->
+        <!-- <a class="nav-link" [routerLink]="['books']">
         <div>Books</div>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav-link" [routerLink]="['racks']">
-        <div>Rack</div>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav-link" [routerLink]="['categories']">
-        <div>Category</div>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav-link" [routerLink]="['users']">
-        <div>User</div>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav-link" [routerLink]="['member']">
-        <div>Member</div>
-      </a>
-    </mat-list-item>
-   </mat-list>
-</ul>
+      </a> -->
+      <!-- </mat-list-item> -->
+      <mat-list-item>
+        <a class="nav-link" [routerLink]="['books']" routerLinkActive="active">
+          <div>Books</div>
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a class="nav-link" [routerLink]="['racks']" routerLinkActive="active">
+          <div>Rack</div>
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a class="nav-link" [routerLink]="['categories']" routerLinkActive="active">
+          <div>Category</div>
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a class="nav-link" [routerLink]="['users']" routerLinkActive="active">
+          <div>User</div>
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a class="nav-link" [routerLink]="['member']" routerLinkActive="active">
+          <div>Member</div>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item>
+        <a href="#" class="nav-link" (click)="onLogOut()">
+          <div>Log out</div>
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </ul>
 </div>
