@@ -6,5 +6,5 @@ export interface Book{
     category : string
     rack : string
     stock : number
+    description:string
   }
-  

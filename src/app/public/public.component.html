@@ -9,7 +9,7 @@
 <!-- <mat-toolbar>
   <div >
     <span>PROJECT - Book Library Management</span>
-   
+
   </div> -->
 
 <!-- </mat-toolbar> -->
@@ -18,7 +18,8 @@
   <div fxLayout="row wrap">
     <div fxFlex="25%" *ngFor="let book of books">
       <mat-card class="books-container">
-        <img mat-card-image src="../../assets/image/noImage.jpg">
+        <img mat-card-image *ngIf="book.bookpic === ''" src="../../assets/image/noImage.jpg">
+        <img mat-card-image *ngIf="book.bookpic != ''" src="{{book.bookpic}}">
         <mat-card-header class="title">
           <mat-card-title>{{book.name | shorten:[20, '...']}}</mat-card-title>
         </mat-card-header>

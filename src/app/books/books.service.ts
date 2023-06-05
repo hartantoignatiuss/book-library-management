@@ -14,13 +14,13 @@ export class BooksService {
   endPointURL: string =
     'https://book-library-management-b46f2-default-rtdb.asia-southeast1.firebasedatabase.app/';
   URL: string = this.endPointURL + 'books.json';
-  
+
   isCreate: boolean = true;
   errorHandling = new Subject<any>();
 
   //book
   books: Book[] = [];
-  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 };
+  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 ,description:''};
   //category
   category: Category = { id: '', name: '', isDelete: 0 };
   categories: Category[] = [];
@@ -30,7 +30,7 @@ export class BooksService {
 
 
   constructor(private http: HttpClient, private AuthService: AuthService) {}
-  
+
   ngOnInit() {}
 
   create(bookData: Book) {
@@ -90,7 +90,7 @@ export class BooksService {
   setFormValue(bookData: Book) {
     this.book = bookData;
   }
-  
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
@@ -113,6 +113,7 @@ export class BooksService {
                 category: responseData[key].category,
                 rack: responseData[key].rack,
                 stock: responseData[key].stock,
+                description : responseData[key].description
               };
             }
           }

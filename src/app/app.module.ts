@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
@@ -63,6 +64,7 @@ import { PublicComponent } from './public/public.component';
 import { PublicBooksComponent } from './public/public-books/public-books.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ShortenPipe } from './pipe/shorten.pipe';
+import { LoginGuard } from './auth/login.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -135,7 +137,9 @@ import { ShortenPipe } from './pipe/shorten.pipe';
     provide: HTTP_INTERCEPTORS,
     useClass : AuthInterceptorService,
     multi: true
-  }
+  },
+  AuthGuard,
+  LoginGuard
 ],
   bootstrap: [AppComponent]
 })

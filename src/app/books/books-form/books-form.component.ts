@@ -18,7 +18,7 @@ export class BooksFormComponent {
   errorHandling = new Subject<any>();
   //book
   bookForm!: FormGroup;
-  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 };
+  book: Book = { id: '', isDelete: 0, name: '', bookpic: '', category: '', rack: '', stock: -1 ,description : ''};
   //category
   category: Category = { id: '', name: '', isDelete: 0 };
   categories: Category[] = [];
@@ -41,6 +41,7 @@ export class BooksFormComponent {
         category: new FormControl('',Validators.required),
         rack: new FormControl('',Validators.required),
         stock: new FormControl('',Validators.required),
+        description : new FormControl('',Validators.required),
       });
       //load categories
       this.BooksService.getCategories().subscribe((categories: Category[]) => {
@@ -77,6 +78,7 @@ export class BooksFormComponent {
             category: new FormControl(this.getCategoryName(this.categories, responseData.category)),
             rack: new FormControl(this.getRackName(this.racks, responseData.rack)),
             stock: new FormControl(responseData.stock),
+            description : new FormControl(responseData.description,Validators.required),
           });
           this.isLoading = false;
         }
@@ -142,10 +144,11 @@ export class BooksFormComponent {
     const book: Book = {
       name: this.bookForm.value.book_name,
       isDelete: 0,
-      bookpic: "null",//this.bookForm.value.bookpic,
+      bookpic: this.bookForm.value.bookpic,
       category: this.getCategoryID(this.categories,this.bookForm.value.category),
       rack: this.getRackID(this.racks,this.bookForm.value.rack),
       stock: this.bookForm.value.stock,
+      description : this.bookForm.value.description
     };
 
     if (this.isCreate === true) {
