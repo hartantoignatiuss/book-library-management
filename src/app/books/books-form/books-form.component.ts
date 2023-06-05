@@ -48,7 +48,7 @@ export class BooksFormComponent {
         this.isLoading = false;
         console.log(categories);
       });
-  
+
       //load racks
       this.BooksService.getRacks().subscribe((racks:Rack[])=>{
         this.racks =racks;
@@ -73,7 +73,7 @@ export class BooksFormComponent {
           this.bookForm = new FormGroup({
             book_name: new FormControl(responseData.name),
             bookpic: new FormControl(responseData.bookpic),
-            
+
             category: new FormControl(this.getCategoryName(this.categories, responseData.category)),
             rack: new FormControl(this.getRackName(this.racks, responseData.rack)),
             stock: new FormControl(responseData.stock),
@@ -82,7 +82,7 @@ export class BooksFormComponent {
         }
       );
     }
-    
+
   }
 
   ngAfterContentChecked(){
@@ -251,7 +251,7 @@ export class BooksFormComponent {
     }
     return ID;
   }
-  
+
   formatIDnonMin(ID: string){
     if(ID!=null && ID.length>1){
       if(!ID.startsWith("-")){

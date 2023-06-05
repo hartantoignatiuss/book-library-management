@@ -43,7 +43,6 @@ export class AuthService {
 
     createAuth(authRequestData: AuthRequestData) {
         const createAuthUrl: string = this.url + ':signUp?key=' + this.authKey;
-
         return this.httpClient.post<AuthResponseData>
             (createAuthUrl, authRequestData)
             .pipe(

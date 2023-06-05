@@ -1,4 +1,18 @@
-span { 
-    color: rgb(247, 72, 72);
-    font-size:medium 
+span {
+  color: #a5a5a5;
+  /* font-weight: 700; */
+  /* font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif)); */
+  font-size: var(--mdc-typography-body1-font-size, 16px);
+  /* line-height: var(--mdc-typography-body1-line-height, 24px); */
+  font-weight: var(--mdc-typography-body1-font-weight, 400);
+  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+  font-size: var(--mdc-typography-body1-font-size, 16px);
+  line-height: var(--mdc-typography-body1-line-height, 24px);
+  font-weight: var(--mdc-typography-body1-font-weight, 500);
+  letter-spacing: var(--mdc-typography-body1-letter-spacing, 0.03125em);
+  -webkit-text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
+  text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
+  text-transform: var(--mdc-typography-body1-text-transform, none);
+  margin-left: 8px;
+    margin-top: 8px;
 }

@@ -11,15 +11,13 @@ export class LoginGuard implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      return true;
-      // if(this.authService.getAuthToken() !== undefined){
-      //   console.log('masuk sini');
-      //    this.router.navigate(['admin']);
-      //    return false;
-      // }
-      // else{
-      //   return true;
-      // }
+      if(this.authService.checkAuthIsAvalaibleOrExpired() === true){
+         this.router.navigate(['admin','books']);
+         return false;
+      }
+      else{
+        return true;
+      }
     }
 
   }
