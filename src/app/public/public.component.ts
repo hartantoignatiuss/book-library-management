@@ -1,6 +1,11 @@
+import { forkJoin } from 'rxjs';
+import { Category } from './../categories/category.model';
+import { CategoryService } from './../categories/category.service';
+import { RackService } from './../racks/rack.service';
 import { Component } from '@angular/core';
 import { BooksService } from '../books/books.service';
 import { Book } from '../books/books.model';
+import { Rack } from '../racks/rack.model';
 
 @Component({
   selector: 'app-public',
@@ -8,24 +13,37 @@ import { Book } from '../books/books.model';
   styleUrls: ['./public.component.css']
 })
 export class PublicComponent {
-  tiles= [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
-  isLoading =true;
 
+  isLoading =true;
+  categories:Category[] = [];
+  racks:Rack[] = [];
   books:Book[]=[];
 
 
-  constructor(private BookService:BooksService){
-    this.BookService.getBooks()
-    .subscribe((response:Book[])=>{
+  constructor(private BookService:BooksService,private RackService:RackService, private CategoryService:CategoryService){
+    const getRacks  = this.RackService.getRacks();
+    const getCategories = this.CategoryService.getCategories();
 
-      this.books = response;
-      this.isLoading = false;
-    })
+    forkJoin([getRacks,getCategories]).subscribe(([responseRacks,ResponseCategories])=>{
+      const racks =responseRacks;
+      const categories = ResponseCategories;
+      this.BookService.getBooks()
+      .subscribe((response:Book[])=>{
+        const books:Book[] = [];
+        response.forEach(book => {
+          const racksDesc = racks.find(rack=>rack.id ===book.rack )?.name || '{}';
+          const categoryDesc = categories.find(category=>category.id ===book.category )?.name || '{}';
+          books.push({ ...book, rackDesc: racksDesc,categoryDesc:categoryDesc});
+
+        });
+
+
+        this.books = books;
+        this.isLoading = false;
+      })
+
+    });
+
 
   }
 }

@@ -65,6 +65,7 @@ import { PublicBooksComponent } from './public/public-books/public-books.compone
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ShortenPipe } from './pipe/shorten.pipe';
 import { LoginGuard } from './auth/login.guard';
+import { PublicBooksDetailComponent } from './public/public-books-detail/public-books-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +111,8 @@ import { LoginGuard } from './auth/login.guard';
     MainComponent,
     PublicComponent,
     PublicBooksComponent,
-    ShortenPipe
+    ShortenPipe,
+    PublicBooksDetailComponent
   ],
   imports: [
     BrowserModule,

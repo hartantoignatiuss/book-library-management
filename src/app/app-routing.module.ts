@@ -1,3 +1,4 @@
+import { PublicBooksDetailComponent } from './public/public-books-detail/public-books-detail.component';
 import { LoginGuard } from './auth/login.guard';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
@@ -28,6 +29,7 @@ import { PublicComponent } from './public/public.component';
 
 const appRoutes: Routes = [
   { path: '', component: PublicComponent },
+  { path: 'view/:id', component: PublicBooksDetailComponent },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {
     path: 'admin',

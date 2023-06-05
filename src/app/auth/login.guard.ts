@@ -11,14 +11,14 @@ export class LoginGuard implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      // console.log('disin',this.authService.checkAuthIsAvalaibleOrExpired());
-      // if(this.authService.checkAuthIsAvalaibleOrExpired() === true){
-      //    this.router.navigate(['admin','books']);
-      //    return false;
-      // }
-      // else{
-      //   return true;
-      // }
+      console.log('Response ',this.authService.checkAuthIsAvalaibleOrExpired());
+      if(this.authService.checkAuthIsAvalaibleOrExpired() === true){
+         this.router.navigate(['admin','books']);
+         return false;
+      }
+      else{
+        return true;
+      }
 
       return true;
     }

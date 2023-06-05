@@ -54,13 +54,10 @@ export class AuthService {
 
     checkAuthIsAvalaibleOrExpired() {
         this.authData = JSON.parse(localStorage.getItem('userData') || '{}');
-        console.log(this.authData);
+
         const currentTime = new Date();
         const expiredTime = new Date(this.authData._tokenExpirationDate);
-        console.log(expiredTime );
-        console.log( currentTime);
-        console.log(expiredTime < currentTime);
-        console.log( Object.keys(this.authData ).length === 0);
+
         if (expiredTime < currentTime || Object.keys(this.authData ).length === 0) {
             console.log('Masuk DISINIII');
             this.logout();
@@ -121,7 +118,6 @@ export class AuthService {
 
     logout() {
         this.userSubject.next(null!);
-        this.router.navigate(["login"]);
         localStorage.removeItem('userData')
         if (this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer)

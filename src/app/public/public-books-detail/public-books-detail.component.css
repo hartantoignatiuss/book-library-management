@@ -1,0 +1,10 @@
+mat-card img{
+
+  width: 300px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+
+}
+.mat-mdc-card{
+}
+.container{
+  min-height: calc(100% - 500px)
+}

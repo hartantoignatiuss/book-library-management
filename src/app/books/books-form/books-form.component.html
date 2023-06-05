@@ -71,9 +71,9 @@
 
 
         <div class="form-group">
-          <mat-form-field [style.width.px]=327>
+          <mat-form-field  class="example-full-width">
             <mat-label>Description</mat-label>
-            <input matInput formControlName="description">
+            <textarea matInput formControlName="description"> </textarea>
             <mat-error *ngIf="!bookForm.get('description')!.valid && bookForm.get('description')!.touched">
               Description is required
             </mat-error>
