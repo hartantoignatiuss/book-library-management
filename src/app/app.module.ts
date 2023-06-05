@@ -61,7 +61,6 @@ import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete
 import {MatButtonModule} from '@angular/material/button';
 import { MainComponent } from './main/main.component';
 import { PublicComponent } from './public/public.component';
-import { PublicBooksComponent } from './public/public-books/public-books.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ShortenPipe } from './pipe/shorten.pipe';
 import { LoginGuard } from './auth/login.guard';
@@ -110,7 +109,6 @@ import { PublicBooksDetailComponent } from './public/public-books-detail/public-
     UserDeleteDialogComponent,
     MainComponent,
     PublicComponent,
-    PublicBooksComponent,
     ShortenPipe,
     PublicBooksDetailComponent
   ],

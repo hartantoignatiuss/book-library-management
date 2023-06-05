@@ -1,13 +1,13 @@
 <mat-toolbar>
-  <span>PROJECT - Book Library Management</span>
+  <a routerLink="/">PROJECT - Book Library Management</a>
   <span class="example-spacer"></span>
 
-  <a [routerLink]="['login']" mat-raised-button color="primary"> Login</a>
+  <a [routerLink]="['/login']" mat-raised-button color="primary"> Login</a>
 </mat-toolbar>
 
 <div class="container">
   <mat-card class="books-container">
-    <div style="    text-align: center;" >
+    <div class="cover-container" >
       <img
         mat-card-image
         *ngIf="book.bookpic === ''"

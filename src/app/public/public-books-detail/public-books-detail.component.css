@@ -3,8 +3,35 @@ mat-card img{
   width: 300px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
 
 }
-.mat-mdc-card{
+/* .mat-mdc-card{
+} */
+/* .container{
+  min-height: calc(100% - 500px)
+} */
+
+mat-card-title{
+  color: #ababab;
+  font-size: 30px;
+}
+mat-card-content{
+  color: #ababab;
+    font-size: 18px;
+}.centered-header{
+  text-align: center;
+}
+.books-container{
+  color : #fff;
+}
+.example-spacer {
+  flex: 1 1 auto;
 }
 .container{
-  min-height: calc(100% - 500px)
+  margin-top : 8px;
+}
+.cover-container{
+  text-align: center;
+  padding-top : 15px;
+}
+a{
+  color : white;
 }
