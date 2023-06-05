@@ -48,7 +48,7 @@ export class UserFormComponent {
 
   checkEmailIsExist(control: FormGroup): null |{[s:string]:boolean} {
     const email = control.value;
-    
+
     const isExist = this.userExist.some(existRack => String(existRack.email) === String(email));
 
     if(isExist === true){
@@ -61,7 +61,7 @@ export class UserFormComponent {
   checkPasswordAndConfirmationIsMatch(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-  
+
     if (password !== confirmPassword) {
       control.get('confirmPassword')?.setErrors({ mismatch: true });
       return { mismatch: true };
@@ -78,33 +78,33 @@ export class UserFormComponent {
   }
 
   onSubmit(){
-    console.log(this.userForm);
-    // const createAuthUserData: AuthRequestData = {
-    //   email:this.userForm.value.email,
-    //   password:this.userForm.value.password,
-    //   returnSecureToken :false,
-    // }
-    // console.log(createAuthUserData);
+    this.isLoading = true;
+    const createAuthUserData: AuthRequestData = {
+      email:this.userForm.value.email,
+      password:this.userForm.value.password,
+      returnSecureToken :false,
+    }
+    console.log(createAuthUserData);
 
-    // this.AuthService.createAuth(createAuthUserData)
-    // .subscribe(response=>{
-    //   const adminData:Admin  = {
-    //     name : this.userForm.value.user_name,
-    //     email:this.userForm.value.email,
-    //     isActive:true
-    //   }
-    //   this.UserService.createAdmin(adminData)
-    //   .subscribe(response=>{
-    //     this.isLoading = false;
+    this.AuthService.createAuth(createAuthUserData)
+    .subscribe(response=>{
+      const adminData:Admin  = {
+        name : this.userForm.value.user_name,
+        email:this.userForm.value.email,
+        isActive:true
+      }
+      this.UserService.createAdmin(adminData)
+      .subscribe(response=>{
+        this.isLoading = false;
 
-    //     this.dialog.open(UserActionDialogComponent, {
-    //       data: {
-    //         message: 'Success Create User',
-    //         isBack: true,
-    //       },
-    //     });
-    //   });
-    // });
+        this.dialog.open(UserActionDialogComponent, {
+          data: {
+            message: 'Success Create User',
+            isBack: true,
+          },
+        });
+      });
+    });
 
 
   }

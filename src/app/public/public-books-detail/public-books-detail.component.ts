@@ -46,25 +46,13 @@ export class PublicBooksDetailComponent {
         const racks = responseRacks;
         const categories = ResponseCategories;
         this.BookService.getBooks().subscribe((response: Book[]) => {
-          const books: Book = {
-            id: '',
-            categoryDesc: '',
-            rackDesc: '',
-            isDelete: 0,
-            name: '',
-            bookpic: '',
-            category: '',
-            rack: '',
-            stock: -1,
-            description: '',
-          };
           response.forEach((book) => {
             if (book.id === book_id) {
               const rackDesc =
-                racks.find((rack) => rack.id === book.rack)?.name || '{}';
+                racks.find((rack) => rack.id === book.rack)?.name || null;
               const categoryDesc =
                 categories.find((category) => category.id === book.category)
-                  ?.name || '{}';
+                  ?.name || null;
 
               this.book = book;
               this.book.rackDesc = rackDesc;

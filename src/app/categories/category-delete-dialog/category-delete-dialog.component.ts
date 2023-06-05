@@ -22,6 +22,10 @@ export class CategoryDeleteDialogComponent {
     this.category = this.data;
   }
 
+  onCloseDialog(){
+    this.dialogRef.close();
+  }
+
   onDeleteRack(){
     this.isLoading= true;
     const rackData = {

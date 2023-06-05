@@ -1,10 +1,7 @@
 .container{
     padding : 8px;
 }
-.books-container{
-    padding : 8px;
-    margin : 8px;
-}
+
 .centered-header{
     text-align: center;
 }
@@ -13,14 +10,5 @@
 }
 .example-spacer {
     flex: 1 1 auto;
-  }
-  mat-card img{
-    object-fit: cover; /*this makes the image in src fit to the size specified below*/
-    width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-    height: 250px;
-  }
-  a{
-    text-decoration:  none;
-
   }
 

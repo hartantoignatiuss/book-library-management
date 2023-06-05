@@ -1,0 +1,25 @@
+<a [routerLink]="[book.id,'view']" class="book-link">
+  <mat-card class="books-container">
+    <img
+      mat-card-image
+      *ngIf="book.bookpic === ''"
+      src="../../assets/image/noImage.jpg"
+      loading="lazy"
+    />
+    <img
+      mat-card-image
+      *ngIf="book.bookpic != ''"
+      src="{{ book.bookpic }}"
+    />
+    <mat-card-header class="title">
+      <mat-card-title>{{
+        book.name | shorten : [24, "..."]
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Category : {{ book.categoryDesc }}</div>
+      <div>Racks : {{ book.rackDesc }}</div>
+      <div>Stocks : {{ book.stock }}</div>
+    </mat-card-content>
+  </mat-card>
+</a>

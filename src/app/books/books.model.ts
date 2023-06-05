@@ -1,7 +1,7 @@
 export interface Book {
   id?: string;
-  categoryDesc?: string;
-  rackDesc?: string;
+  categoryDesc?: string|null;
+  rackDesc?: string|null;
   isDelete: number;
   name: string;
   bookpic: string;

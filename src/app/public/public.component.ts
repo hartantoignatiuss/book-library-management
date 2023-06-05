@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth/auth.service';
 import { forkJoin } from 'rxjs';
 import { Category } from './../categories/category.model';
 import { CategoryService } from './../categories/category.service';
@@ -13,37 +14,17 @@ import { Rack } from '../racks/rack.model';
   styleUrls: ['./public.component.css']
 })
 export class PublicComponent {
+  isLoginAdmin:boolean=false;
 
-  isLoading =true;
-  categories:Category[] = [];
-  racks:Rack[] = [];
-  books:Book[]=[];
-
-
-  constructor(private BookService:BooksService,private RackService:RackService, private CategoryService:CategoryService){
-    const getRacks  = this.RackService.getRacks();
-    const getCategories = this.CategoryService.getCategories();
-
-    forkJoin([getRacks,getCategories]).subscribe(([responseRacks,ResponseCategories])=>{
-      const racks =responseRacks;
-      const categories = ResponseCategories;
-      this.BookService.getBooks()
-      .subscribe((response:Book[])=>{
-        const books:Book[] = [];
-        response.forEach(book => {
-          const racksDesc = racks.find(rack=>rack.id ===book.rack )?.name || '{}';
-          const categoryDesc = categories.find(category=>category.id ===book.category )?.name || '{}';
-          books.push({ ...book, rackDesc: racksDesc,categoryDesc:categoryDesc});
-
-        });
-
-
-        this.books = books;
-        this.isLoading = false;
-      })
-
-    });
-
+  constructor(private AuthService:AuthService){
 
   }
+
+  ngOnInit(){
+    if(this.AuthService.checkAuthIsAvalaibleOrExpired() === true){
+      this.isLoginAdmin = true;
+    }
+
+  }
+
 }

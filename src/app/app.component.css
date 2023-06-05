@@ -15,7 +15,11 @@ table{
 }
 
 a{
+
+}
+.project_name{
   text-decoration:  none;
+  color: #fff;
 }
 
 

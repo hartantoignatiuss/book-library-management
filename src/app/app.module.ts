@@ -57,7 +57,6 @@ import { MemberActionDialogComponent } from './member/member-action-dialog/membe
 import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
 import { PaddingPipe } from './pipe/padding.pipe';
 import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
-import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MainComponent } from './main/main.component';
 import { PublicComponent } from './public/public.component';
@@ -65,6 +64,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { ShortenPipe } from './pipe/shorten.pipe';
 import { LoginGuard } from './auth/login.guard';
 import { PublicBooksDetailComponent } from './public/public-books-detail/public-books-detail.component';
+import { PublicBookComponent } from './public/public-book/public-book.component';
+import { PublicBookItemComponent } from './public/public-book-item/public-book-item.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,11 +108,13 @@ import { PublicBooksDetailComponent } from './public/public-books-detail/public-
     MemberNonactiveDialogComponent,
     PaddingPipe,
     UserActionDialogComponent,
-    UserDeleteDialogComponent,
     MainComponent,
     PublicComponent,
     ShortenPipe,
-    PublicBooksDetailComponent
+    PublicBooksDetailComponent,
+    PublicBookComponent,
+    PublicBookItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,5 @@
+import { NotFoundComponent } from './not-found/not-found.component';
+import { PublicBookComponent } from './public/public-book/public-book.component';
 import { PublicBooksDetailComponent } from './public/public-books-detail/public-books-detail.component';
 import { LoginGuard } from './auth/login.guard';
 import { AdminComponent } from './admin/admin.component';
@@ -10,26 +12,23 @@ import { RackFormComponent } from './racks/rack-form/rack-form.component';
 import { CategoryFormComponent } from './categories/category-form/category-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipesResolverService } from './recipes/recipes-resolver.service';
-import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
-import { AppComponent } from './app.component';
 import { BooksMainComponent } from './books/books-main/books-main.component';
 import { BooksFormComponent } from './books/books-form/books-form.component';
 import { MemberMainComponent } from './member/member-main/member-main.component';
 import { MemberFormComponent } from './member/member-form/member-form.component';
-import { MainComponent } from './main/main.component';
 import { PublicComponent } from './public/public.component';
 
 const appRoutes: Routes = [
-  { path: '', component: PublicComponent },
-  { path: 'view/:id', component: PublicBooksDetailComponent },
+  {
+    path: '',
+    component: PublicComponent,
+    children: [
+      { path: '', component: PublicBookComponent },
+      { path: ':id/view', component: PublicBooksDetailComponent },
+    ],
+  },
+
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {
     path: 'admin',
@@ -53,7 +52,8 @@ const appRoutes: Routes = [
             component: BooksFormComponent,
           },
         ],
-      },{
+      },
+      {
         path: 'racks',
         children: [
           {
@@ -119,30 +119,9 @@ const appRoutes: Routes = [
       },
     ],
   },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' },
 ];
-
-// { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-// {
-//   path: 'recipes',
-//   component: RecipesComponent,
-//   canActivate: [AuthGuard],
-//   children: [
-//     { path: '', component: RecipeStartComponent },
-//     { path: 'new', component: RecipeEditComponent },
-//     {
-//       path: ':id',
-//       component: RecipeDetailComponent,
-//       resolve: [RecipesResolverService]
-//     },
-//     {
-//       path: ':id/edit',
-//       component: RecipeEditComponent,
-//       resolve: [RecipesResolverService]
-//     }
-//   ]
-// },
-// { path: 'shopping-list', component: ShoppingListComponent },
-// { path: 'auth', component: AuthComponent }
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

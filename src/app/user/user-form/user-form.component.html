@@ -39,7 +39,7 @@
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Password</mat-label>
-            <input matInput formControlName="password">
+            <input matInput formControlName="password" type="password">
 
             <mat-error *ngIf="!userForm.get('password')!.valid && userForm.get('password')!.touched && userForm.get('password')?.errors?.['required']">
               Password is required
@@ -50,8 +50,8 @@
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Confirm Password</mat-label>
-            <input matInput formControlName="confirmPassword">
- 
+            <input matInput formControlName="confirmPassword" type="password">
+
             <mat-error *ngIf="!userForm.get('confirmPassword')!.valid && userForm.get('confirmPassword')!.touched  && userForm.get('confirmPassword')?.errors?.['required']">
              Confirm Password are not match
             </mat-error>
