@@ -1,1 +1,61 @@
-<p>rental-form works!</p>
+<mat-card>
+    <mat-card-header>
+      <h3>Rent a Book</h3>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="rentalForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <mat-form-field [style.width.px]=500>
+              <mat-label>Book Name</mat-label>
+              <br>
+              <input matInput formControlName="bookName" readonly>
+            </mat-form-field>
+            <br>
+            <img
+                mat-card-image
+                *ngIf="book.bookpic != ''"
+                src="{{ book.bookpic }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <br>
+            <mat-form-field [style.width.px]=500>
+              <mat-label>Book Stock</mat-label>
+              <br>
+              <input matInput formControlName="bookStock" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="form-group">
+            <mat-form-field [style.width.px]=500>
+              <mat-label><strong>Member Renting</strong></mat-label>
+              <select matNativeControl class="form-control"
+              formControlName="memberName" required>
+                <option *ngFor="let mems of members" [value]="mems.name">
+                  {{mems.name}}
+                </option>
+              </select>
+              <mat-error *ngIf="!rentalForm.get('member')!.valid && rentalForm.get('member')!.touched">
+                Member is required</mat-error>
+            </mat-form-field>
+          </div> -->
+  
+          
+  
+          <br>
+          <div class="form-group">
+            <button  mat-raised-button
+            color="primary" type="submit" [disabled]="!rentalForm.valid">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
+  <app-loader *ngIf="isLoading"></app-loader>
+  

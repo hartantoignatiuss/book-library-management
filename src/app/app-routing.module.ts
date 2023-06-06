@@ -20,6 +20,7 @@ import { MemberFormComponent } from './member/member-form/member-form.component'
 import { PublicComponent } from './public/public.component';
 import { RentalMainComponent } from './rental/rental-main/rental-main.component';
 import { RentalFormComponent } from './rental/rental-form/rental-form.component';
+import { RentalBookLandingComponent } from './rental/rental-book-landing/rental-book-landing.component';
 
 const appRoutes: Routes = [
   {
@@ -63,11 +64,11 @@ const appRoutes: Routes = [
             component: RentalMainComponent,
           },
           {
-            path: 'create',
-            component: RentalFormComponent,
+            path: 'avail',
+            component: RentalBookLandingComponent,
           },
           {
-            path: ':id/edit',
+            path: ':id/rent',
             component: RentalFormComponent,
           },
         ],

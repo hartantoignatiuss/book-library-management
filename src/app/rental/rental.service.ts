@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Book } from './../books/books.model';
 import { Rental } from './rental.model';
+import { Member } from 'src/app/member/member.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,9 @@ export class RentalService {
   //rental
   rentals: Rental[] = [];
   rental: Rental = { id: '', isReturn: 0, memberId: '', bookId: '', date: ''};
+  //member
+  member: Member = { id: '', memberId: '', name: '', typeIndentity: '', identityId: '', address: '', gender: ''};
+  members: Member[] = [];
 
   constructor(private http: HttpClient, private AuthService: AuthService) { }
   
@@ -104,17 +108,17 @@ export class RentalService {
       })
       .pipe(
         map((responseData: any) => {
-          const rentals: Rental[] = [];
+          const members: Member[] = [];
           for (const key in responseData) {
             if (
               responseData.hasOwnProperty(key) &&
               responseData[key].isDelete !== 1
             ) {
-              rentals.push({ ...responseData[key], id: key });
+              members.push({ ...responseData[key], id: key });
             }
           }
-          this.rentals = rentals;
-          return rentals;
+          this.members = members;
+          return members;
         })
       );
   }

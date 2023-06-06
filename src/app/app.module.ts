@@ -71,6 +71,7 @@ import { RentalFormComponent } from './rental/rental-form/rental-form.component'
 import { RentalMainComponent } from './rental/rental-main/rental-main.component';
 import { RentalActionDialogComponent } from './rental/rental-action-dialog/rental-action-dialog.component';
 import { RentalReturnDialogComponent } from './rental/rental-return-dialog/rental-return-dialog.component';
+import { RentalBookLandingComponent } from './rental/rental-book-landing/rental-book-landing.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { RentalReturnDialogComponent } from './rental/rental-return-dialog/renta
     RentalFormComponent,
     RentalActionDialogComponent,
     RentalReturnDialogComponent,
+    RentalBookLandingComponent,
   ],
   imports: [
     BrowserModule,

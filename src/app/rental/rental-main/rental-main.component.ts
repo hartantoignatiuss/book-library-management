@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActionDialog } from './../../ActionDialog.model';
 import { RentalActionDialogComponent } from './../rental-action-dialog/rental-action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RentalReturnDialogComponent } from '../rental-return-dialog/rental-return-dialog.component';
+import { RentalReturnDialogComponent } from './../rental-return-dialog/rental-return-dialog.component';
 import { Router } from '@angular/router';
 import { Rental } from './../rental.model';
 import { RentalService } from './../rental.service';
@@ -68,7 +68,7 @@ export class RentalMainComponent {
   }
 
   onClickCreateButton() {
-    this.router.navigate(['admin','rental', 'create']);
+    this.router.navigate(['admin','rental', 'avail']);
   }
 
   onClickEdit(rental: Rental) {
