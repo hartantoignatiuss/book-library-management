@@ -29,7 +29,7 @@ export class RentalService {
   members: Member[] = [];
 
   constructor(private http: HttpClient, private AuthService: AuthService) { }
-
+  
   ngOnInit() {}
 
   create(rentalData: Rental) {
@@ -149,9 +149,5 @@ export class RentalService {
   }
   setterBooks(books: Book[]){
     this.books = books;
-  }
-
-  reloadPage(){
-
   }
 }
