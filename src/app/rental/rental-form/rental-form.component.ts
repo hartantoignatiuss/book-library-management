@@ -1,7 +1,7 @@
 import { RentalActionDialogComponent } from './../rental-action-dialog/rental-action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject, Observable, map, forkJoin } from 'rxjs';
+import { Subject, forkJoin } from 'rxjs';
 import { RentalService } from './../rental.service';
 import { BooksService } from './../../books/books.service';
 import { Book } from '../../books/books.model';
@@ -13,7 +13,7 @@ import { Member } from 'src/app/member/member.model';
 @Component({
   selector: 'app-rental-form',
   templateUrl: './rental-form.component.html',
-  styleUrls: ['./rental-form.component.css']
+  styleUrls: ['./rental-form.component.css'],
 })
 export class RentalFormComponent {
   errorHandling = new Subject<any>();
@@ -30,14 +30,14 @@ export class RentalFormComponent {
   isLoading: boolean = true;
 
   constructor(
-    private BooksService: BooksService,
-    private RentalService: RentalService,
+    private booksService: BooksService,
+    private rentalService: RentalService,
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {
       this.rentalForm = new FormGroup({
         // memberId: new FormControl('',Validators.required),
-        // memberName: new FormControl('',Validators.required),
+        memberId: new FormControl('',Validators.required),
         // bookId: new FormControl('',Validators.required),
         bookName: new FormControl('',Validators.required),
         bookCover: new FormControl(''),
@@ -50,16 +50,16 @@ export class RentalFormComponent {
       this.isLoading = false;
     }
     else {
-      forkJoin([this.RentalService.getMembers()]).subscribe(([responseMembers]) =>{
+      forkJoin([this.rentalService.getMembers()]).subscribe(([responseMembers]) =>{
         const members: Member[] = responseMembers;
         this.members = members;
-        console.log("cari ini0 :" + members);
 
-        this.BooksService.getBookById(this.route.snapshot.params['id']).subscribe(
+        this.booksService.getBookById(this.route.snapshot.params['id']).subscribe(
           (responseData) => {
             this.rentalForm = new FormGroup({
               // memberId: new FormControl(responseData.name),
-              // memberName: new FormControl(members),
+              // memberName: new FormControl(members,Validators.required),
+              memberId: new FormControl(''),
   
               // bookId: new FormControl(responseData.name),
               // bookName: new FormControl(this.getCategoryName(responseCategories, responseData.category),Validators.required),
@@ -77,41 +77,87 @@ export class RentalFormComponent {
 
   }
 
+  onSubmitTest(){
+    let currentDate = new Date();
+    let date:String = "" + currentDate.getFullYear() 
+                          + this.padTo2Digits(currentDate.getMonth()) 
+                          + this.padTo2Digits(currentDate.getDate()) 
+                          + this.padTo2Digits(currentDate.getHours()) 
+                          + this.padTo2Digits(currentDate.getMinutes());
+
+    console.log("Trial submit mem.id:" + this.rentalForm.value.memberId);
+    console.log("Trial submit book.id:" + this.book.id);
+    console.log("Trial submit book.nm:" + this.book.name);
+    console.log("Trial submit :" + date);
+  }
+
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
   onSubmit() {
     this.isLoading=true;
+    
+    let currentDate = new Date();
+    let date:String = "" + currentDate.getFullYear() + "/"
+                          + this.padTo2Digits(currentDate.getMonth()) + "/"
+                          + this.padTo2Digits(currentDate.getDate()) + " "
+                          + this.padTo2Digits(currentDate.getHours()) + ":"
+                          + this.padTo2Digits(currentDate.getMinutes());
 
-  //   const book: Book = {
-  //     name: this.bookForm.value.book_name,
-  //     isDelete: 0,
-  //     bookpic: this.bookForm.value.bookpic,
-  //     category: this.getCategoryID(this.categories,this.bookForm.value.category),
-  //     rack: this.getRackID(this.racks,this.bookForm.value.rack),
-  //     stock: this.bookForm.value.stock,
-  //     description : this.bookForm.value.description
-  //   };
+    const rental: Rental = {
+      memberId: this.rentalForm.value.memberId,
+      bookId: this.book.id + "",
+      date: date + "",
+      isReturn: 0,
+    };
 
-  //   const id = this.BooksService.book.id!;
-  //   const data = {
-  //     [id]: book,
-  //   };
-  //   this.BooksService.update(data)
-  //   .subscribe((response) => {
-  //     this.dialog.open(BooksActionDialogComponent, {
-  //       data: {
-  //         message: 'Succes Edit ' + book.name,
-  //         isBack: true,
-  //       },
-  //     });
-  //   },
-  //   (error) => {
-  //     this.isLoading = false;
-  //     this.dialog.open(BooksActionDialogComponent, {
-  //       data: {
-  //         message: 'Fail Create Book. Please try again',
-  //         isBack: false,
-  //       },
-  //     });
-  //   });
+    if(this.book.stock > 0){
+      this.updateBookStock(this.book);
+
+      this.rentalService.create(rental)
+      .subscribe((response) => {
+        this.isLoading = false;
+  
+        this.dialog.open(RentalActionDialogComponent, {
+          data: {
+            message: 'Success Rental Book ' + this.book.name,
+            isBack: true,
+          },
+        });
+      },
+      (error) => {
+        this.isLoading = false;
+        this.dialog.open(RentalActionDialogComponent, {
+          data: {
+            message: 'Fail Rental Book ' + this.book.name + '. Please try again',
+            isBack: false,
+          },
+        });
+      });
+    }else{
+      this.isLoading = false;
+        this.dialog.open(RentalActionDialogComponent, {
+          data: {
+            message: 'No Stocks Available for Book: ' + this.book.name + '.',
+            isBack: false,
+          },
+        });
+    }
+    
+  }
+
+  updateBookStock(book:Book){
+    book.stock = book.stock-1;
+
+    const id = this.booksService.book.id!;
+    const data = {
+      [id]: book,
+    };
+    this.booksService.update(data)
+    .subscribe((response) => {
+      console.log("book-altered");
+    });
   }
 
 }

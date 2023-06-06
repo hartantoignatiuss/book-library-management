@@ -4,4 +4,6 @@
         bookId: string;
         date: string;
         isReturn: number;
+        bookCover?: string|"";
+        rentalLabel?: string|"";
   }

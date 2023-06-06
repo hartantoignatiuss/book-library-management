@@ -1,1 +1,19 @@
-<p>rental-return-dialog works!</p>
+
+<div mat-dialog-content>
+    Are you sure to Return this {{rental.rentalLabel}}
+    <div>
+      <button  mat-raised-button color="danger"
+      (click)="onReturnRental()">
+      Yes
+      </button>
+
+      <button mat-raised-button color="primary"
+      (click)="onCloseDialog()">
+        No
+      </button>
+
+  </div>
+
+
+
+  <app-loader *ngIf="isLoading"></app-loader>

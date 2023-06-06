@@ -99,7 +99,7 @@ export class UserFormComponent {
 
         this.dialog.open(UserActionDialogComponent, {
           data: {
-            message: 'Success Create User',
+            message: 'Success Create User ' + adminData.name,
             isBack: true,
           },
         });

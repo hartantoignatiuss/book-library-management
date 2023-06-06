@@ -105,7 +105,7 @@ export class BooksFormComponent {
 
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Success Create Book ' + book.name,
+          message: 'Success Create Book: ' + book.name,
           isBack: true,
         },
       });
@@ -130,7 +130,7 @@ export class BooksFormComponent {
     .subscribe((response) => {
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Succes Edit ' + book.name,
+          message: 'Succes Edit Book: ' + book.name,
           isBack: true,
         },
       });
@@ -139,7 +139,7 @@ export class BooksFormComponent {
       this.isLoading = false;
       this.dialog.open(BooksActionDialogComponent, {
         data: {
-          message: 'Fail Create Book. Please try again',
+          message: 'Fail Create Book ' + book.name + '. Please try again',
           isBack: false,
         },
       });

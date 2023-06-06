@@ -29,29 +29,25 @@
             </mat-form-field>
           </div>
 
-          <!-- <div class="form-group">
+        <div class="form-group">
             <mat-form-field [style.width.px]=500>
-              <mat-label><strong>Member Renting</strong></mat-label>
-              <select matNativeControl class="form-control"
-              formControlName="memberName" required>
-                <option *ngFor="let mems of members" [value]="mems.name">
+              <mat-label>Member Rent</mat-label>
+              <mat-select formControlName="memberId" >
+                <mat-option *ngFor="let mems of members" [value]="mems.id">
                   {{mems.name}}
-                </option>
-              </select>
-              <mat-error *ngIf="!rentalForm.get('member')!.valid && rentalForm.get('member')!.touched">
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="!rentalForm.get('memberId')!.valid && rentalForm.get('memberId')!.touched">
                 Member is required</mat-error>
             </mat-form-field>
-          </div> -->
-  
-          
-  
-          <br>
-          <div class="form-group">
-            <button  mat-raised-button
-            color="primary" type="submit" [disabled]="!rentalForm.valid">
-              Save
-            </button>
           </div>
+        </div>
+
+        <div class="form-group">
+          <button  mat-raised-button
+          color="primary" type="submit" [disabled]="!rentalForm.valid">
+            Save
+          </button>
         </div>
       </form>
     </mat-card-content>

@@ -1,1 +1,30 @@
-<p>rental-action-dialog works!</p>
+<div mat-dialog-content>
+    <div>
+      <h3>{{ message }}</h3>
+    </div>
+    <div *ngIf="additional_messages.length !== 0">
+      <div *ngFor="let additional_message of additional_messages">
+        {{ additional_message }}
+      </div>
+    </div>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="isBack"
+        (click)="onBackToRackPage()"
+      >
+        Ok
+      </button>
+  
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="!isBack"
+        (click)="closeDialog()"
+      >
+        Ok
+      </button>
+    </div>
+  </div>
+  

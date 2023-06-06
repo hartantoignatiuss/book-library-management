@@ -84,7 +84,7 @@ export class RackFormComponent {
 
         this.dialog.open(RackActionDialogComponent, {
           data: {
-            message: 'Success Create Rack',
+            message: 'Success Create Rack ' + rack.name,
             isBack: true,
           },
         });
@@ -93,7 +93,7 @@ export class RackFormComponent {
         this.isLoading = false;
         this.dialog.open(RackActionDialogComponent, {
           data: {
-            message: 'Fail Create Rack. Please try again',
+            message: 'Fail Create Rack ' + rack.name + '. Please try again',
             isBack: false,
           },
         });
@@ -111,7 +111,7 @@ export class RackFormComponent {
       this.isLoading =false;
         this.dialog.open(RackActionDialogComponent, {
           data: {
-            message: 'Succes Edit Racks',
+            message: 'Succes Edit Racks ' + rack.name,
             isBack: true,
           },
         });
@@ -120,7 +120,7 @@ export class RackFormComponent {
         this.isLoading = false;
         this.dialog.open(RackActionDialogComponent, {
           data: {
-            message: 'Fail Create Rack. Please try again',
+            message: 'Fail Create Rack ' + rack.name + '. Please try again',
             isBack: false,
           },
         });

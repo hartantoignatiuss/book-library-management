@@ -105,7 +105,7 @@ export class MemberFormComponent {
 
         this.dialog.open(MemberActionDialogComponent, {
           data: {
-            message: 'Success Create Member',
+            message: 'Success Create Member ' + member.name,
             isBack: true,
           },
         });
@@ -114,7 +114,7 @@ export class MemberFormComponent {
         this.isLoading = false;
         this.dialog.open(MemberActionDialogComponent, {
           data: {
-            message: 'Fail Create member. Please try again',
+            message: 'Fail Create member ' + member.name + '. Please try again',
             isBack: false,
           },
         });
@@ -131,7 +131,7 @@ export class MemberFormComponent {
     .subscribe((response) => {
         this.dialog.open(MemberActionDialogComponent, {
           data: {
-            message: 'Success Edit members',
+            message: 'Success Edit members ' + member.name,
             isBack: true,
           },
         });
@@ -140,7 +140,7 @@ export class MemberFormComponent {
         this.isLoading = false;
         this.dialog.open(MemberActionDialogComponent, {
           data: {
-            message: 'Fail Create member. Please try again',
+            message: 'Fail Create member ' + member.name + '. Please try again',
             isBack: false,
           },
         });

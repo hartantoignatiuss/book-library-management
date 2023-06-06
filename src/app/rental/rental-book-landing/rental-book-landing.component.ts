@@ -43,23 +43,7 @@ export class RentalBookLandingComponent {
     });
   }
 
-  onClickEdit(book: Book) {
-    this.router.navigate(['admin','rental', book.id, 'edit']);
-  }
-
-  onClickDelete(book: Book) {
-    const dialogRef = this.dialog.open(BooksDeleteDialogComponent, {
-      data: book,
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.isLoading = true;
-      this.BooksService.getBooks().subscribe(
-        (books: Book[]) => {
-          this.books = books;
-          this.isLoading = false;
-        }
-      );
-    });
+  onClickRental(book: Book) {
+    this.router.navigate(['admin','rental', book.id, 'rent']);
   }
 }

@@ -80,7 +80,7 @@ export class CategoryFormComponent {
 
         this.dialog.open(CategoryActionDialogComponent, {
           data: {
-            message: 'Success Create Category',
+            message: 'Success Create Category' + category.name,
             isBack: true,
           },
         });
@@ -89,7 +89,7 @@ export class CategoryFormComponent {
           this.isLoading = false;
           this.dialog.open(CategoryActionDialogComponent, {
             data: {
-              message: 'Fail Create Category. Please try again',
+              message: 'Fail Create Category' + category.name + '. Please try again',
               isBack: false,
             },
           });
@@ -105,7 +105,7 @@ export class CategoryFormComponent {
       .subscribe((response) => {
         this.dialog.open(CategoryActionDialogComponent, {
           data: {
-            message: 'Succes Edit Category',
+            message: 'Succes Edit Category ' + category.name,
             isBack: true,
           },
         });
@@ -114,7 +114,7 @@ export class CategoryFormComponent {
           this.isLoading = false;
           this.dialog.open(CategoryActionDialogComponent, {
             data: {
-              message: 'Fail Create Category. Please try again',
+              message: 'Fail Create Category ' + category.name + '. Please try again',
               isBack: false,
             },
           });

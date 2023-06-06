@@ -143,4 +143,11 @@ export class RentalService {
       })
     );
   }
+
+  getterBooks(){
+    return this.books;
+  }
+  setterBooks(books: Book[]){
+    this.books = books;
+  }
 }
