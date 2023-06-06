@@ -28,16 +28,17 @@
           </mat-form-field>
         </div>
 
-
+        <br>
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Category Option</mat-label>
-            <mat-select formControlName="category" >
-              <mat-option>deleted</mat-option>
-              <mat-option *ngFor="let cats of categories" [value]="cats.name">
+            <select matNativeControl class="form-control"
+            formControlName="category" required>
+            <option>deleted</option>
+              <option *ngFor="let cats of categories" [value]="cats.name">
                 {{cats.name}}
-              </mat-option>
-            </mat-select>
+              </option>
+            </select>
             <mat-error *ngIf="!bookForm.get('category')!.valid && bookForm.get('category')!.touched">
               Category is required</mat-error>
           </mat-form-field>
@@ -48,12 +49,13 @@
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Rack Option</mat-label>
-            <mat-select formControlName="rack" >
-              <mat-option>deleted</mat-option>
-              <mat-option *ngFor="let racs of racks" [value]="racs.name">
+            <select matNativeControl class="form-control"
+            formControlName="rack" required>
+              <option>deleted</option>
+              <option *ngFor="let racs of racks" [value]="racs.name">
                 {{racs.name}}
-              </mat-option>
-            </mat-select>
+              </option>
+            </select>
             <mat-error *ngIf="!bookForm.get('rack')!.valid && bookForm.get('rack')!.touched">
               Rack is required</mat-error>
           </mat-form-field>
