@@ -9,5 +9,4 @@ export interface Book {
   rack: string;
   stock: number;
   description: string;
-
 }

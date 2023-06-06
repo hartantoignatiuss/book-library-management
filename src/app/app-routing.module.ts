@@ -18,6 +18,8 @@ import { BooksFormComponent } from './books/books-form/books-form.component';
 import { MemberMainComponent } from './member/member-main/member-main.component';
 import { MemberFormComponent } from './member/member-form/member-form.component';
 import { PublicComponent } from './public/public.component';
+import { RentalMainComponent } from './rental/rental-main/rental-main.component';
+import { RentalFormComponent } from './rental/rental-form/rental-form.component';
 
 const appRoutes: Routes = [
   {
@@ -50,6 +52,23 @@ const appRoutes: Routes = [
           {
             path: ':id/edit',
             component: BooksFormComponent,
+          },
+        ],
+      },
+      {
+        path: 'rental',
+        children: [
+          {
+            path: '',
+            component: RentalMainComponent,
+          },
+          {
+            path: 'create',
+            component: RentalFormComponent,
+          },
+          {
+            path: ':id/edit',
+            component: RentalFormComponent,
           },
         ],
       },

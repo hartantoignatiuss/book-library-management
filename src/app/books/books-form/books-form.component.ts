@@ -176,16 +176,16 @@ export class BooksFormComponent {
     for (let i = 0; i < length; i++) {
       if(categories[i].id?.startsWith("-")){
         // console.log("masuk sini dong");
-        console.log("cats: " + categories[i].id);
-        console.log("cats-input: " + this.formatIDnonMin(category));
-        console.log(categories[i].id?.substring(1,categories[i].id?.length));
-        console.log(this.formatID(category));
+        // console.log("cats: " + categories[i].id);
+        // console.log("cats-input: " + this.formatIDnonMin(category));
+        // console.log(categories[i].id?.substring(1,categories[i].id?.length));
+        // console.log(this.formatID(category));
         if(categories[i].id?.substring(1,categories[i].id?.length) === this.formatID(category)){
           return categories[i].name;
         }
       } else {
         if(categories[i].id === this.formatIDnonMin(category)){
-          console.log(categories[i].id);
+          // console.log(categories[i].id);
           return categories[i].name;
         }
       }
@@ -196,15 +196,15 @@ export class BooksFormComponent {
   getRackName(racks: Rack[], rack: string){
     let rackName: string  = 'deleted';
     let length = racks.length;
-    console.log("valueR-Loaded : " + rack);
-    console.log("test: " + length);
+    // console.log("valueR-Loaded : " + rack);
+    // console.log("test: " + length);
 
     for (let i = 0; i < length; i++) {
       if(racks[i].id?.startsWith("-")){
-        console.log("racs: " + racks[i].id?.substring(1,racks[i].id?.length));
-        console.log("racs - input: " + this.formatID(rack));
+        // console.log("racs: " + racks[i].id?.substring(1,racks[i].id?.length));
+        // console.log("racs - input: " + this.formatID(rack));
         if(racks[i].id?.substring(1,racks[i].id?.length) === this.formatID(rack)){
-          console.log(racks[i].name);
+          // console.log(racks[i].name);
           return racks[i].name;
         }
       } else {
@@ -220,15 +220,15 @@ export class BooksFormComponent {
   getCategoryID(categories: Category[], category: string){
     let categoryID: string = "error";
     let length = categories.length;
-    console.log("UPvalueC : " + category);
-    console.log("test: ");
-    console.log("test: " + length);
+    // console.log("UPvalueC : " + category);
+    // console.log("test: ");
+    // console.log("test: " + length);
 
     for (let i = 0; i < length; i++) {
       //compare name
       if(categories[i].name === category){
-        console.log(categories[i].name);
-        console.log(categories[i].id);
+        // console.log(categories[i].name);
+        // console.log(categories[i].id);
         categoryID = categories[i].id + "";
         return categoryID;
       }
@@ -239,13 +239,13 @@ export class BooksFormComponent {
   getRackID(racks: Rack[], rack: string){
     let rackID: string = "error";
     let length = racks.length;
-    console.log("UPvalueR : " + rack);
+    // console.log("UPvalueR : " + rack);
 
     for (let i = 0; i < length; i++) {
       //compare name
       if(racks[i].name === rack){
-        console.log(racks[i].name);
-        console.log(racks[i].id);
+        // console.log(racks[i].name);
+        // console.log(racks[i].id);
         rackID = racks[i].id + "";
         return rackID;
       }

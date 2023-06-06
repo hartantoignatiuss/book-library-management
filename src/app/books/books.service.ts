@@ -83,20 +83,11 @@ export class BooksService {
   //   this.book = bookData;
   // }
 
-  setIsCreateValue(status: boolean) {
-    this.isCreate = status;
-  }
-
-  setFormValue(bookData: Book) {
-    this.book = bookData;
-  }
-
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   getBookById(id: string) {
-    this.delay(2200);
     return this.http
       .get(this.URL, {
         params: new HttpParams().set('auth', this.AuthService.getAuthToken()),

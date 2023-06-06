@@ -28,7 +28,13 @@
 
       <tr *ngFor="let book of books; let i = index">
         <th>{{i+1}}</th>
-        <th>{{book.bookpic | shorten : [40, "..."]}}</th>
+        <th class="kecil">
+          <img
+          mat-card-image
+          *ngIf="book.bookpic != ''"
+          src="{{ book.bookpic }}"
+          />
+          <br>{{book.bookpic | shorten : [30, "..."]}}</th>
         <th>{{book.name}}</th>
         <th>{{book.stock}}</th>
         <th>

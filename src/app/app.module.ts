@@ -56,7 +56,6 @@ import { MemberFormComponent } from './member/member-form/member-form.component'
 import { MemberActionDialogComponent } from './member/member-action-dialog/member-action-dialog.component';
 import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog/member-nonactive-dialog.component';
 import { PaddingPipe } from './pipe/padding.pipe';
-// import { RentalMainComponent } from './rental/rental-main/rental-main.component';
 import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
 import { MatButtonModule} from '@angular/material/button';
 import { MainComponent } from './main/main.component';
@@ -68,6 +67,11 @@ import { PublicBooksDetailComponent } from './public/public-books-detail/public-
 import { PublicBookComponent } from './public/public-book/public-book.component';
 import { PublicBookItemComponent } from './public/public-book-item/public-book-item.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RentalFormComponent } from './rental/rental-form/rental-form.component';
+import { RentalMainComponent } from './rental/rental-main/rental-main.component';
+import { RentalActionDialogComponent } from './rental/rental-action-dialog/rental-action-dialog.component';
+import { RentalReturnDialogComponent } from './rental/rental-return-dialog/rental-return-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +112,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MemberActionDialogComponent,
     MemberNonactiveDialogComponent,
     PaddingPipe,
-    //RentalMainComponent
     UserActionDialogComponent,
     MainComponent,
     PublicComponent,
@@ -116,7 +119,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PublicBooksDetailComponent,
     PublicBookComponent,
     PublicBookItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RentalMainComponent,
+    RentalFormComponent,
+    RentalActionDialogComponent,
+    RentalReturnDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +143,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatSelectModule,
     MatFormFieldModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [ShoppingListService, RecipeService,
     {
@@ -145,7 +152,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     multi: true
   },
   AuthGuard,
-  LoginGuard
+  LoginGuard,
 ],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,7 @@
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Book Name</mat-label>
-            <input matInput formControlName="book_name">
+            <input matInput formControlName="book_name" required>
             <mat-error *ngIf="!bookForm.get('book_name')!.valid && bookForm.get('book_name')!.touched">
               Book is required
             </mat-error>
@@ -28,7 +28,6 @@
           </mat-form-field>
         </div>
 
-        <br>
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Category Option</mat-label>
@@ -64,7 +63,7 @@
         <div class="form-group">
           <mat-form-field [style.width.px]=327>
             <mat-label>Stock</mat-label>
-            <input matInput formControlName="stock">
+            <input matInput formControlName="stock" required>
             <mat-error *ngIf="!bookForm.get('stock')!.valid && bookForm.get('stock')!.touched">
               Book is required
             </mat-error>
