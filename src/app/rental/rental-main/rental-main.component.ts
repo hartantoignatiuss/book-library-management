@@ -34,6 +34,10 @@ export class RentalMainComponent {
   ) {}
 
   ngOnInit() {
+    this.getAllRentalData();
+  }
+
+  getAllRentalData(){
     forkJoin([this.BooksService.getBooks(), this.RentalService.getMembers()]).subscribe(([responseBooks, responseMembers]) =>{
       const members: Member[] = responseMembers;
       this.members = members;
@@ -85,7 +89,7 @@ export class RentalMainComponent {
       this.isLoading = true;
       this.RentalService.getRentals().subscribe(
         (rentals: Rental[]) => {
-          this.rentals = rentals;
+          this.getAllRentalData();
           this.isLoading = false;
         }
       );

@@ -35,6 +35,7 @@
         <th>{{book.stock}}</th>
         <th>
           <button mat-raised-button color="primary"
+          *ngIf="book.stock > 0"
           (click)="onClickRental(book)">
           Rent Now
           </button>
