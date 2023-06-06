@@ -14,4 +14,12 @@ table{
   --bs-table-border-color: #000000;
 }
 
+a{
+
+}
+.project_name{
+  text-decoration:  none;
+  color: #fff;
+}
+
 

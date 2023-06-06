@@ -17,7 +17,9 @@ export class RackService {
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
   isCreate: boolean = true;
 
-  constructor(private http: HttpClient,private AuthService: AuthService) {}
+  constructor(private http: HttpClient,private AuthService: AuthService) {
+
+  }
 
   create(rack: Rack) {
     return this.http.post(this.URL, rack,{

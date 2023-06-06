@@ -1,14 +1,15 @@
+import { AuthGuard } from './auth/auth.guard';
 
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule} from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -57,14 +58,16 @@ import { MemberNonactiveDialogComponent } from './member/member-nonactive-dialog
 import { PaddingPipe } from './pipe/padding.pipe';
 // import { RentalMainComponent } from './rental/rental-main/rental-main.component';
 import { UserActionDialogComponent } from './user/user-action-dialog/user-action-dialog.component';
-import { UserDeleteDialogComponent } from './user/user-delete-dialog/user-delete-dialog.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule} from '@angular/material/button';
 import { MainComponent } from './main/main.component';
 import { PublicComponent } from './public/public.component';
-import { PublicBooksComponent } from './public/public-books/public-books.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { ShortenPipe } from './pipe/shorten.pipe'; 
-
+import { ShortenPipe } from './pipe/shorten.pipe';
+import { LoginGuard } from './auth/login.guard';
+import { PublicBooksDetailComponent } from './public/public-books-detail/public-books-detail.component';
+import { PublicBookComponent } from './public/public-book/public-book.component';
+import { PublicBookItemComponent } from './public/public-book-item/public-book-item.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,11 +110,13 @@ import { ShortenPipe } from './pipe/shorten.pipe';
     PaddingPipe,
     //RentalMainComponent
     UserActionDialogComponent,
-    UserDeleteDialogComponent,
     MainComponent,
     PublicComponent,
-    PublicBooksComponent,
-    ShortenPipe
+    ShortenPipe,
+    PublicBooksDetailComponent,
+    PublicBookComponent,
+    PublicBookItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +143,9 @@ import { ShortenPipe } from './pipe/shorten.pipe';
     provide: HTTP_INTERCEPTORS,
     useClass : AuthInterceptorService,
     multi: true
-  }
+  },
+  AuthGuard,
+  LoginGuard
 ],
   bootstrap: [AppComponent]
 })

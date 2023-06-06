@@ -43,7 +43,6 @@ export class AuthService {
 
     createAuth(authRequestData: AuthRequestData) {
         const createAuthUrl: string = this.url + ':signUp?key=' + this.authKey;
-
         return this.httpClient.post<AuthResponseData>
             (createAuthUrl, authRequestData)
             .pipe(
@@ -55,11 +54,12 @@ export class AuthService {
 
     checkAuthIsAvalaibleOrExpired() {
         this.authData = JSON.parse(localStorage.getItem('userData') || '{}');
+
         const currentTime = new Date();
         const expiredTime = new Date(this.authData._tokenExpirationDate);
 
-        if (expiredTime < currentTime) {
-            console.log('a');
+        if (expiredTime < currentTime || Object.keys(this.authData ).length === 0) {
+            console.log('Masuk DISINIII');
             this.logout();
             return false;
         }
@@ -118,7 +118,6 @@ export class AuthService {
 
     logout() {
         this.userSubject.next(null!);
-        this.router.navigate(["login"]);
         localStorage.removeItem('userData')
         if (this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer)

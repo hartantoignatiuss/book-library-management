@@ -22,6 +22,10 @@ export class RackDeleteDialogComponent {
     this.rack = this.data;
   }
 
+  onCloseDialog(){
+    this.dialogRef.close;
+  }
+
   onDeleteRack(){
     this.isLoading= true;
     const rackData = {

@@ -1,0 +1,37 @@
+<div class="container">
+  <mat-card class="books-container" *ngIf="book.id !== ''">
+    <div class="cover-container">
+      <img
+        mat-card-image
+        *ngIf="book.bookpic === ''"
+        src="../../assets/image/noImage.jpg"
+      />
+      <img mat-card-image *ngIf="book.bookpic != ''" src="{{ book.bookpic }}" />
+    </div>
+    <mat-card-header class="title">
+      <mat-card-title>{{ book.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Category : {{ book.categoryDesc }}</div>
+      <div>Racks : {{ book.rackDesc }}</div>
+      <div>Stocks : {{ book.stock }}</div>
+      <div>Description :</div>
+      <div>
+        {{ book.description }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="books-container" *ngIf="book.id === ''">
+    <mat-card-header class="title">
+      <mat-card-title>Oops!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Book Not Found</div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<br />
+
+<app-loader *ngIf="isLoading"></app-loader>
