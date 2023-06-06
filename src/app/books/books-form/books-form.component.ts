@@ -1,7 +1,7 @@
 import { BooksActionDialogComponent } from '../books-action-dialog/books-action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject, Observable, map } from 'rxjs';
+import { Subject, Observable, map, forkJoin } from 'rxjs';
 import { BooksService } from './../books.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -41,21 +41,6 @@ export class BooksFormComponent {
         stock: new FormControl('',Validators.required),
         description : new FormControl('',Validators.required),
       });
-      //load categories
-      this.BooksService.getCategories().subscribe((categories: Category[]) => {
-        this.categories = categories;
-        this.isLoading = false;
-        console.log("cats");
-        console.log(categories);
-      });
-
-      //load racks
-      this.BooksService.getRacks().subscribe((racks:Rack[])=>{
-        this.racks =racks;
-        this.isLoading =false;
-        console.log("racs");
-        console.log(racks);
-      });
   }
 
   ngOnInit() {
@@ -67,21 +52,45 @@ export class BooksFormComponent {
     }
     else {
       this.isCreate = false;
-      this.BooksService.getBookById(this.route.snapshot.params['id']).subscribe(
-        (responseData) => {
-          this.bookForm = new FormGroup({
-            book_name: new FormControl(responseData.name),
-            bookpic: new FormControl(responseData.bookpic),
 
-            category: new FormControl(this.getCategoryName(this.categories, responseData.category)),
-            rack: new FormControl(this.getRackName(this.racks, responseData.rack)),
-            stock: new FormControl(responseData.stock),
-            description : new FormControl(responseData.description,Validators.required),
-          });
-          this.isLoading = false;
-          console.log("cari ini :" + this.getRackName(this.racks, responseData.rack));
-        }
-      );
+      forkJoin([this.BooksService.getRacks(),this.BooksService.getCategories()]).subscribe(([responseRacks, responseCategories]) =>{
+        const racks: Rack[] = responseRacks;
+        const categories: Category[] = responseCategories;
+        this.categories = categories;
+        this.racks =racks;
+
+        this.BooksService.getBookById(this.route.snapshot.params['id']).subscribe(
+          (responseData) => {
+            this.bookForm = new FormGroup({
+              book_name: new FormControl(responseData.name),
+              bookpic: new FormControl(responseData.bookpic),
+  
+              category: new FormControl(this.getCategoryName(responseCategories, responseData.category)),
+              rack: new FormControl(this.getRackName(responseRacks, responseData.rack)),
+              stock: new FormControl(responseData.stock),
+              description : new FormControl(responseData.description,Validators.required),
+            });
+            this.isLoading = false;
+            // console.log("cari ini :" + this.getRackName(this.racks, responseData.rack));
+          }
+        );
+      } );
+
+      // this.BooksService.getBookById(this.route.snapshot.params['id']).subscribe(
+      //   (responseData) => {
+      //     this.bookForm = new FormGroup({
+      //       book_name: new FormControl(responseData.name),
+      //       bookpic: new FormControl(responseData.bookpic),
+
+      //       category: new FormControl(this.getCategoryName(this.categories, responseData.category)),
+      //       rack: new FormControl(this.getRackName(this.racks, responseData.rack)),
+      //       stock: new FormControl(responseData.stock),
+      //       description : new FormControl(responseData.description,Validators.required),
+      //     });
+      //     this.isLoading = false;
+      //     console.log("cari ini :" + this.getRackName(this.racks, responseData.rack));
+      //   }
+      // );
     }
 
   }
@@ -163,8 +172,6 @@ export class BooksFormComponent {
     let length = categories.length;
     // console.log("valueC-loaded : " + category);
     // console.log("test: " + length);
-    this.delay(1000);
-    this.delay(1000);
 
     for (let i = 0; i < length; i++) {
       if(categories[i].id?.startsWith("-")){
@@ -191,14 +198,13 @@ export class BooksFormComponent {
     let length = racks.length;
     console.log("valueR-Loaded : " + rack);
     console.log("test: " + length);
-    this.delay(1000);
 
     for (let i = 0; i < length; i++) {
       if(racks[i].id?.startsWith("-")){
         console.log("racs: " + racks[i].id?.substring(1,racks[i].id?.length));
         console.log("racs - input: " + this.formatID(rack));
         if(racks[i].id?.substring(1,racks[i].id?.length) === this.formatID(rack)){
-          // console.log(racks[i].id);
+          console.log(racks[i].name);
           return racks[i].name;
         }
       } else {
