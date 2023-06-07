@@ -48,7 +48,13 @@ export class BooksFormComponent {
     //handle create vs edit
     if (this.route.snapshot.params['id'] === undefined) {
       this.isCreate = true;
+      forkJoin([this.BooksService.getRacks(),this.BooksService.getCategories()]).subscribe(([responseRacks, responseCategories]) =>{
+        const racks: Rack[] = responseRacks;
+        const categories: Category[] = responseCategories;
+        this.categories = categories;
+        this.racks =racks;
       this.isLoading = false;
+      });
     }
     else {
       this.isCreate = false;
@@ -61,16 +67,28 @@ export class BooksFormComponent {
 
         this.BooksService.getBookById(this.route.snapshot.params['id']).subscribe(
           (responseData) => {
-            this.bookForm = new FormGroup({
-              book_name: new FormControl(responseData.name),
-              bookpic: new FormControl(responseData.bookpic),
-  
-              category: new FormControl(this.getCategoryName(responseCategories, responseData.category)),
-              rack: new FormControl(this.getRackName(responseRacks, responseData.rack)),
-              stock: new FormControl(responseData.stock),
-              description : new FormControl(responseData.description,Validators.required),
-            });
-            this.isLoading = false;
+
+            if(responseData.id !==''){
+              this.bookForm = new FormGroup({
+                book_name: new FormControl(responseData.name),
+                bookpic: new FormControl(responseData.bookpic),
+
+                category: new FormControl(this.getCategoryName(responseCategories, responseData.category)),
+                rack: new FormControl(this.getRackName(responseRacks, responseData.rack)),
+                stock: new FormControl(responseData.stock),
+                description : new FormControl(responseData.description,Validators.required),
+              });
+              this.isLoading = false;
+            }
+            else{
+              this.dialog.open(BooksActionDialogComponent, {
+                data: {
+                  message: 'Book not found! ',
+                  isBack: true,
+                },
+              });
+            }
+
             // console.log("cari ini :" + this.getRackName(this.racks, responseData.rack));
           }
         );

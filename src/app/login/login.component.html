@@ -12,8 +12,11 @@
             <mat-form-field [style.width.px]=327>
               <mat-label>Email</mat-label>
               <input matInput formControlName="email">
-              <mat-error *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched">
+              <mat-error *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched &&loginForm.get('email')?.errors?.['required']">
                 Email is required
+              </mat-error>
+              <mat-error *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched &&loginForm.get('email')?.errors?.['email']">
+                Email is not on valid format
               </mat-error>
             </mat-form-field>
           </div>

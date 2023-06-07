@@ -47,9 +47,20 @@ export class CategoryFormComponent {
         ([responseExistCategory, responseCategory]) => {
           this.existCategories = responseExistCategory;
           this.categoryDataWillUpdated = responseCategory;
-          this.categoryForm = new FormGroup({
-            category_name: new FormControl(responseCategory.name,[Validators.required,this.checkCategoriesNameIsExist.bind(this)]),
-          });
+          if(responseCategory.id !== ''){
+            this.categoryForm = new FormGroup({
+              category_name: new FormControl(responseCategory.name,[Validators.required,this.checkCategoriesNameIsExist.bind(this)]),
+            });
+          }
+          else{
+            this.dialog.open(CategoryActionDialogComponent, {
+              data: {
+                message: 'Category data not found',
+                isBack: true,
+              },
+            });
+          }
+
           this.isLoading = false;
         }
       )
@@ -58,7 +69,7 @@ export class CategoryFormComponent {
 
   checkCategoriesNameIsExist(control: FormGroup): null |{[s:string]:boolean} {
     const categoryName = control.value;
-    
+
     if(this.categoryDataWillUpdated.name !== '' && this.categoryDataWillUpdated.name==categoryName){
       return null;
     }

@@ -28,7 +28,7 @@ export class MemberFormComponent {
     'Female'
   ]
 
-  
+
   constructor(
     private MemberService: MemberService,
     private route: ActivatedRoute,
@@ -71,15 +71,26 @@ export class MemberFormComponent {
       this.isCreate = false;
       this.MemberService.getmemberById(this.route.snapshot.params['id']).subscribe(
         (responseData) => {
-          this.memberForm.setValue({
-            member_id:responseData.memberId,
-            member_name: responseData.name,
-            type_indentity : responseData.typeIndentity,
-            identity_id: responseData.identityId,
-            address : responseData.address,
-            gender : responseData.gender
-          });
-        
+          if(responseData.id !== ''){
+            this.memberForm.setValue({
+              member_id:responseData.memberId,
+              member_name: responseData.name,
+              type_indentity : responseData.typeIndentity,
+              identity_id: responseData.identityId,
+              address : responseData.address,
+              gender : responseData.gender
+            });
+          }
+          else{
+            this.dialog.open(MemberActionDialogComponent, {
+              data: {
+                message: 'Member data not found',
+                isBack: true,
+              },
+            });
+          }
+
+
           this.isLoading = false;
         }
       );

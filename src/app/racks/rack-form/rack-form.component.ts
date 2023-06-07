@@ -10,7 +10,7 @@ import { Rack } from '../rack.model';
 import {
   FormGroup,
   FormControl,
-  Validators,  
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -18,7 +18,7 @@ import {
   templateUrl: './rack-form.component.html',
   styleUrls: ['./rack-form.component.css'],
 })
-export class RackFormComponent {                 
+export class RackFormComponent {
   rack: Rack = { id: '', name: '', location: '', isDelete: 0 };
   rackDataWillUpdated: Rack = { id: '', name: '', location: '', isDelete: 0 };
   rackForm!: FormGroup;
@@ -50,11 +50,22 @@ export class RackFormComponent {
       this.isCreate = false;
       this.RackService.getRackByID(this.route.snapshot.params['id']).subscribe(
         (responseData) => {
-          this.rackDataWillUpdated =responseData;
-          this.rackForm = new FormGroup({
-            rack_name: new FormControl(responseData.name,  [Validators.required,this.checkRackNameIsExist.bind(this)]),
-            location: new FormControl(responseData.location,Validators.required),
-          });
+          if(responseData.id !== ''){
+            this.rackDataWillUpdated =responseData;
+            this.rackForm = new FormGroup({
+              rack_name: new FormControl(responseData.name,  [Validators.required,this.checkRackNameIsExist.bind(this)]),
+              location: new FormControl(responseData.location,Validators.required),
+            });
+          }
+          else{
+            this.dialog.open(RackActionDialogComponent, {
+              data: {
+                message: 'Rack data not found!',
+                isBack: true,
+              },
+            });
+          }
+
           this.isLoading = false;
         }
       );
@@ -63,7 +74,7 @@ export class RackFormComponent {
 
   checkRackNameIsExist(control: FormGroup): null |{[s:string]:boolean} {
     const rackName = control.value;
-    
+
     if(this.rackDataWillUpdated.name !== '' && this.rackDataWillUpdated.name==rackName){
       return null;
     }
